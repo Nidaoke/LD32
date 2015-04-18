@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 	//Max jump height
 	public float jumpHeight;
 	
+	public float playerSlide;
+	
 	//Can we move?
 	public bool canMove;
 	//Are we on the ground?
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
 	//Have we cancelled our current jump?
 	private bool _jumpCancelled;
 	//Have we reached a wall?
-	public bool _atWall;
+	private bool _atWall;
 	//Are we jumping?
 	private bool _isJumping;
 	//Are we accepting input?
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
 	//Maximum movement speed
 	private float _maxSpeed;
 	//Direction we are facing (-1 left, 1 right)
-	public float _faceDir;
+	private float _faceDir;
 	//The lowest we're currently allowed on the Y axis (used for slopes)
 	private float _minY;
 	//Length of our downward facing rays
@@ -62,9 +64,12 @@ public class PlayerController : MonoBehaviour
 	//Our transforms y scale
 	private float yScale;
 	//Check which way walls are when dashing
-	public int _wallDir;
+	private int _wallDir;
 	
 	public Transform food;
+	
+	public float lastY;
+	private bool hasLanded;
 	
 	private BoxCollider2D _boxCollider;
 	
@@ -122,25 +127,34 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 		else
+		{
 			_atWall = false;
+		}
 		
 		//Scale our animation to be facing the right direction
 		playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
 		
 		if(canInput)
 		{
-			float s = 0;
+			float s = _currentSpeed/movementSpeed;
 			//Surely there's an easier way to clamp it to max/min
 			if(Input.GetAxisRaw("Horizontal") > 0.5f)
-				s = Mathf.Ceil(Input.GetAxisRaw("Horizontal"));
-			if(Input.GetAxisRaw("Horizontal") < - 0.5f)
-				s = Mathf.Floor(Input.GetAxisRaw("Horizontal"));
-
-			//damageSpeed doesn't do anything, so it's always 0 at the moment
+				s +=playerSlide;
+			else if(Input.GetAxisRaw("Horizontal") < -0.5f)
+				s -=playerSlide;
+			else
+			{
+				if(s > 0)
+					s -= playerSlide;
+				if(s < 0)
+					s += playerSlide;
+			}
 			float cSpeed = s;
 			//Clamp our 'cSpeed'
-			if(cSpeed > 1)
-				cSpeed = 1;
+			if(cSpeed > 1f)
+				cSpeed = 1f;
+			if(cSpeed < -1f)
+				cSpeed = -1f;
 			//And times it by our movement speed
 			_currentSpeed = movementSpeed * cSpeed;
 		}
@@ -212,6 +226,11 @@ public class PlayerController : MonoBehaviour
 				playerState = PlayerState.Running;
 				////anim.SetInteger("animState",1);
 			}
+			if(!hasLanded)
+			{
+				hasLanded = true;
+				lastY = transform.position.y;
+			}
 		}
 		else 
 		{
@@ -223,6 +242,7 @@ public class PlayerController : MonoBehaviour
 			else
 			{
 				playerState = PlayerState.Falling;
+				hasLanded = false;
 				//anim.SetInteger("animState",3);
 			}
 		}
@@ -283,6 +303,7 @@ public class PlayerController : MonoBehaviour
 		if(canJump)
 		{
 			canJump = false;
+			lastY = transform.position.y;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,jumpHeight);
 		}
 		//This handled our falling, and limits it so we don't fall too fast

@@ -63,7 +63,9 @@ public class BlobMovement : MonoBehaviour
 	private float _minY;
 	//Length of our downward facing rays
 	private float _dRay;
+	//Our transforms x scale
 	private float xScale;
+	//Our transforms y scale
 	private float yScale;
 	//Check which way walls are when dashing
 	public int _wallDir;
@@ -72,10 +74,14 @@ public class BlobMovement : MonoBehaviour
 	
 	private BoxCollider2D _boxCollider;
 	
+	public int enemiesEaten;
+	public int targetEnemies;
+	public int evolveLevel;
+	
 	void OnGUI()
 	{
-		if(GUI.Button(new Rect(10,10,100,100),""))
-			StartRunning();
+		GUI.Label(new Rect(10,10,200,200),"Evolve Level: " + (evolveLevel+1).ToString() + " / 3");
+		GUI.Label (new Rect(10,30,200,200),"Enemies Eaten: " + enemiesEaten.ToString());
 	}
 	
 	//Set stuff up at the start
@@ -98,8 +104,10 @@ public class BlobMovement : MonoBehaviour
 		//The player is alive!
 		_isDead = false;
 		
+		//Get scales
 		xScale = transform.localScale.x / 2f;
 		yScale = transform.localScale.y;
+		targetEnemies = 2;
 		FindFood();
 	}
 	
@@ -117,53 +125,26 @@ public class BlobMovement : MonoBehaviour
 				
 			//We are not at a wall
 			_atWall = false;
-			//Raycast 5 rays horizontally (bottom of player, centre, top of player)
-//			RaycastHit2D hit1 = Physics2D.Raycast (new Vector3(transform.position.x + (0.3f * checkDir),transform.position.y + 0.8f,0), Vector3.right * checkDir, 0.23f,1 << 8);
+			//Raycast 5 rays horizontally
+			RaycastHit2D hit1 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y + (xScale/2f),0), Vector3.right * checkDir, 0.23f,1 << 8);
 			RaycastHit2D hit2 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y,0), Vector3.right * checkDir,xScale+0.03f, 1 << 8);
-//			RaycastHit2D hit3 = Physics2D.Raycast (new Vector3(transform.position.x + (0.3f * checkDir),transform.position.y - 0.8f,0), Vector3.right * checkDir, 0.23f, 1 << 8);
+			RaycastHit2D hit3 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y - (xScale/2f),0), Vector3.right * checkDir, 0.23f, 1 << 8);
 			RaycastHit2D hit4 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y - (xScale - 0.1f),0), Vector3.right * checkDir, xScale+0.03f, 1 << 8);
 			RaycastHit2D hit5 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y + (xScale - 0.1f),0), Vector3.right * checkDir, xScale+0.03f, 1 << 8);
 			//Check to see if any of the rays have hit the environment
-			if(//hit1.collider != null ||
+			if(hit1.collider != null ||
 			   hit2.collider != null ||
-			 //  hit3.collider != null ||
+			   hit3.collider != null ||
 			   hit4.collider != null ||
 			   hit5.collider != null)
 			{
-				//Set a float for checking objects angle
-				bool angle = true;
-				bool angle2 = true;
-				bool angle3 = true;
-				bool angle4 = true;
-				bool angle5 = true;
-				//If we're on the ground, check the angle of the object it has hit
-//				if(isGrounded)
-//				{
-////					if(hit3.collider != null && hit3.collider.name.Contains ("ramp"))
-////						angle = false;
-//					if(hit2.collider != null && hit2.collider.name.Contains ("ramp"))
-//						angle2 = false;
-////					if(hit1.collider != null && hit1.collider.name.Contains ("ramp"))
-////						angle3 = false;
-//					if(hit4.collider != null && hit4.collider.name.Contains ("ramp"))
-//						angle4 = false;
-//					if(hit5.collider != null && hit5.collider.name.Contains ("ramp"))
-//						angle5 = false;
-//				}
-				//If the angle is 0 then we're at a wall, otherwise it's a slope, 
-				if(angle && angle2 && angle3 && angle4 && angle5)
+
+				_wallDir = (int)checkDir;
+				_atWall = true;
+				if(isRunning)
 				{
-					_wallDir = (int)checkDir;
-					_atWall = true;
-					if(isRunning)
-					{
-						Debug.Log("Changing direction");
-						_faceDir *= -1;
-					}
-				}
-				else
-				{
-					_atWall = false;
+					Debug.Log("Changing direction");
+					_faceDir *= -1;
 				}
 			}
 		}
@@ -175,7 +156,6 @@ public class BlobMovement : MonoBehaviour
 		
 		if(canInput)
 		{
-			//This will be for pushing the player when taking damage. Currently not being used... kinda
 			float s = 0;
 			//Surely there's an easier way to clamp it to max/min
 			if(Input.GetAxisRaw("Horizontal") > 0.5f)
@@ -392,6 +372,7 @@ public class BlobMovement : MonoBehaviour
 		}
 		if(other.gameObject.tag == "Enemy")
 		{
+			++enemiesEaten;
 			Destroy (other.gameObject);
 			StartCoroutine("Eat",false);
 		}
@@ -405,7 +386,12 @@ public class BlobMovement : MonoBehaviour
 		yield return new WaitForSeconds(0.5f);
 		isEating = false;
 		if(!isFood && food != null)
-			isRunning = true;
+		{
+			if(enemiesEaten == targetEnemies)
+				StartCoroutine("Evolve");
+			else
+				isRunning = true;
+		}
 		else
 			FindFood();
 	}
@@ -420,6 +406,31 @@ public class BlobMovement : MonoBehaviour
 			else
 				_faceDir = 1;
 			StartRunning();
+		}
+	}
+	
+	IEnumerator Evolve()
+	{
+		if(evolveLevel < 2)
+		{
+			++evolveLevel;
+			switch(evolveLevel)
+			{
+			case 1:
+				transform.localScale = new Vector3(1,1,1);
+				GetComponent<CircleCollider2D>().offset = new Vector2(0,-0.5f);
+				xScale = transform.localScale.x / 2f;
+				yScale = transform.localScale.y;
+				targetEnemies = 5;
+				break;
+			case 2:
+				transform.localScale = new Vector3(2,2,1);
+				xScale = transform.localScale.x / 2f;
+				yScale = transform.localScale.y;
+				break;
+			}
+			yield return new WaitForSeconds(1.0f);
+			isRunning = true;
 		}
 	}
 }

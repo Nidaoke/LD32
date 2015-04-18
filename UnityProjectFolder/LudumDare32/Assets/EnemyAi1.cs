@@ -7,6 +7,7 @@ public class EnemyAi1 : MonoBehaviour
 	//speed of movement
 	public float jumppower;
 	//setting the basic jump
+	public bool _left;
 
 	private Rigidbody _controller;
 	// the basic controller
@@ -23,21 +24,26 @@ public class EnemyAi1 : MonoBehaviour
 		//setting the direction
 		_startPosition = transform.position;
 		//finding the spawn point 
+		_left = false;
 
 	}
 
 	public void Update()
 	{
-		_controller.AddForce((Vector2.right * speed / 100));
-		//setting movement 
+		if (_left == false) {
+			_controller.AddForce ((Vector3.right * speed / 100));
+		} else {
+			_controller.AddForce ((Vector3.left * speed / 100));
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
+
 		if (other.gameObject.tag == "col") 
 		{
-			_controller.AddForce((Vector3.left * speed / 100));
-
+			Debug.Log("collided with wall");
+			_left = true;
 		}
 	}
 }

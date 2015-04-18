@@ -346,7 +346,7 @@ public class PlayerController : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D other)
 	{	
-		if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Blob")
+		if(other.gameObject.tag == "Enemy")// || other.gameObject.tag == "Blob")
 		{
 			Debug.Log("You have died");
 		}

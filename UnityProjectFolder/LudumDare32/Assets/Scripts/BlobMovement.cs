@@ -155,6 +155,12 @@ public class BlobMovement : MonoBehaviour
 		else
 			_atWall = false;
 		
+		
+		RaycastHit2D playerHit = Physics2D.Raycast(transform.position,Vector3.right * _faceDir,xScale+0.1f, 1<<10);
+		if(playerHit.collider != null && playerHit.collider.gameObject.tag == "Player")
+		{
+			isRunning = false;
+		}
 		//Scale our animation to be facing the right direction
 		playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
 		
@@ -384,6 +390,11 @@ public class BlobMovement : MonoBehaviour
 			++enemiesEaten;
 			Destroy (other.gameObject);
 			StartCoroutine("Eat",false);
+		}
+		
+		if(other.gameObject.tag == "Player")
+		{
+			isRunning = false;
 		}
 	}
 	

@@ -328,7 +328,9 @@ public class EnemyMovement : MonoBehaviour
 	
 	void ChasePlayer()
 	{
-		if((int)transform.position.y == (int)player.GetComponent<PlayerController>().lastY)
+		float myY = Mathf.Round(transform.position.y * 2)/2;
+		float playerY = Mathf.Round(player.GetComponent<PlayerController>().lastY * 2)/2; 
+		if(myY == playerY)
 		{
 			if(player.transform.position.x < transform.position.x)
 				_faceDir = -1;
@@ -345,11 +347,14 @@ public class EnemyMovement : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.gameObject.tag == "JumpTrigger" && enemyType == EnemyType.Jumping)
-		{
-			float blobY = GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().chaseY;
-			if((int)transform.position.y < (int)blobY)
+		{	
+			float blobY = Mathf.Round(GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().chaseY *2)/2;
+			float myY = Mathf.Round (transform.position.y * 2)/2;
+			if(myY < blobY)
 			{
-				Jump ();
+				JumpTrigger.DirectionLimit dir = other.GetComponent<JumpTrigger>().directionLimit;
+				if(dir == JumpTrigger.DirectionLimit.None || (dir == JumpTrigger.DirectionLimit.Left && _faceDir == -1) || (dir == JumpTrigger.DirectionLimit.Right && _faceDir == 1))
+					Jump ();
 			}
 		}
 	}

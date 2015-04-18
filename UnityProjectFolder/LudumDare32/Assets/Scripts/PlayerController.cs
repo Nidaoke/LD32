@@ -3,6 +3,11 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {
+
+	public bool canFeed = true;
+
+	public GameObject blob;
+
 	//List of player states
 	public enum PlayerState {Idle, Running, Jumping, Falling, Eating, Dead};
 	//Current state
@@ -26,7 +31,7 @@ public class PlayerController : MonoBehaviour
 	//Are we jumping?
 	public bool canJump;
 	
-	//Max health
+	//Max health                    Will we have Health or just death???
 	public int maxHealth;
 	//Current health value
 	public int currentHealth;
@@ -204,11 +209,16 @@ public class PlayerController : MonoBehaviour
 			Jump();
 		}
 		
-		if(Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
+		if(Input.GetKeyDown(KeyCode.LeftControl) && isGrounded && canFeed)
 		{
 			GameObject[] foodCount = GameObject.FindGameObjectsWithTag("Food");
 			if(foodCount.Length == 0)
 			{
+				Instantiate(food,new Vector3(transform.position.x,transform.position.y -0.75f,0),Quaternion.identity);
+				GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
+			}else{
+
+				//Destroy(food);
 				Instantiate(food,new Vector3(transform.position.x,transform.position.y -0.75f,0),Quaternion.identity);
 				GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
 			}
@@ -350,6 +360,32 @@ public class PlayerController : MonoBehaviour
 		if(other.gameObject.tag == "Enemy")// || other.gameObject.tag == "Blob")
 		{
 			Debug.Log("You have died");
+
+			Instantiate(deadParticle, transform.position, Quaternion.identity);
+			//   BLOB DEATH????                Instantiate(blob.gameObject.deadParticle, blob.transform.position, Quaternion.identity);
+
+			Destroy(gameObject);
+			Destroy(blob);
+		}
+
+		if (other.gameObject.tag == "Portal") {
+
+			Debug.Log("In Portal");
+
+			canFeed = false;
+		} else {
+
+			canFeed = true;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D col) {
+
+		Debug.Log ("Exited Trigger");
+
+		if (col.gameObject.tag == "Portal") {
+
+			canFeed = true;
 		}
 	}
 }

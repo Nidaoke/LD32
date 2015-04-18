@@ -137,7 +137,6 @@ public class PlayerController : MonoBehaviour
 		if(canInput)
 		{
 			float s = _currentSpeed/movementSpeed;
-			Debug.Log(s.ToString());
 			//Surely there's an easier way to clamp it to max/min
 			if(Input.GetAxisRaw("Horizontal") > 0.5f)
 				s +=playerSlide;

@@ -80,6 +80,10 @@ public class BlobMovement : MonoBehaviour
 	public int targetEnemies;
 	public int evolveLevel;
 	
+	private float lastY;
+	public float chaseY;
+	private bool hasLanded;
+	
 	void OnGUI()
 	{
 		GUI.Label(new Rect(10,10,200,200),"Evolve Level: " + (evolveLevel+1).ToString() + " / 3");
@@ -89,6 +93,8 @@ public class BlobMovement : MonoBehaviour
 	//Set stuff up at the start
 	void Start()
 	{
+		lastY = -9999;
+		chaseY = -9999;
 		_boxCollider = GetComponent<BoxCollider2D>();
 		//Facing right
 		_faceDir = 1;
@@ -111,6 +117,7 @@ public class BlobMovement : MonoBehaviour
 		yScale = transform.localScale.y;
 		targetEnemies = 2;
 		FindFood();
+		
 	}
 	
 	void Update()
@@ -232,6 +239,11 @@ public class BlobMovement : MonoBehaviour
 				playerState = PlayerState.Running;
 				////anim.SetInteger("animState",1);
 			}
+			if(!hasLanded)
+			{
+				hasLanded = true;
+				SetY();
+			}
 		}
 		else 
 		{
@@ -302,6 +314,7 @@ public class BlobMovement : MonoBehaviour
 		//If we can jump and were not dashing then push the player up!
 		if(canJump)
 		{
+			SetY();
 			canJump = false;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,jumpHeight);
 		}
@@ -401,7 +414,24 @@ public class BlobMovement : MonoBehaviour
 				_faceDir = -1;
 			else
 				_faceDir = 1;
+			chaseY = lastY;
 			StartRunning();
+		}
+	}
+	
+	void SetY()
+	{
+		switch(evolveLevel)
+		{
+		case 0:
+			lastY = transform.position.y + 0.5f;
+			break;
+		case 1:
+			lastY = transform.position.y;
+			break;
+		case 2:
+			lastY = transform.position.y - 1;
+			break;
 		}
 	}
 	

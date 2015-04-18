@@ -3,6 +3,9 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour 
 {
+	public enum EnemyType {Chasing, Jumping, Fleeing};
+	public EnemyType enemyType;
+	
 	//List of player states
 	public enum PlayerState {Idle, Running, Jumping, Falling, Eating, Damaged, Evolving};
 	//Current state
@@ -37,6 +40,8 @@ public class EnemyMovement : MonoBehaviour
 	public bool _atWall;
 	//Are we jumping?
 	private bool _isJumping;
+	
+	private bool hasLanded;
 	//Are we accepting input?
 	public bool canInput;
 	
@@ -59,12 +64,15 @@ public class EnemyMovement : MonoBehaviour
 	//Check which way walls are when dashing
 	public int _wallDir;
 	
+	private GameObject player;
 	
 	private BoxCollider2D _boxCollider;
 	
 	//Set stuff up at the start
 	void Start()
 	{
+		player = GameObject.FindGameObjectWithTag("Player");
+		
 		_boxCollider = GetComponent<BoxCollider2D>();
 		//Facing right
 		_faceDir = 1;
@@ -198,6 +206,14 @@ public class EnemyMovement : MonoBehaviour
 				playerState = PlayerState.Running;
 				////anim.SetInteger("animState",1);
 			}
+			if(!hasLanded)
+			{
+				hasLanded = true;
+				if(enemyType == EnemyType.Chasing)
+				{
+					ChasePlayer();
+				}
+			}
 		}
 		else 
 		{
@@ -209,6 +225,7 @@ public class EnemyMovement : MonoBehaviour
 			else
 			{
 				playerState = PlayerState.Falling;
+				hasLanded = false;
 				//anim.SetInteger("animState",3);
 			}
 		}
@@ -309,8 +326,31 @@ public class EnemyMovement : MonoBehaviour
 		}
 	}
 	
+	void ChasePlayer()
+	{
+		if((int)transform.position.y == (int)player.GetComponent<PlayerController>().lastY)
+		{
+			if(player.transform.position.x < transform.position.x)
+				_faceDir = -1;
+			else
+				_faceDir = 1;
+		}
+	}
+	
 	void StartRunning()
 	{
 		isRunning = true;
+	}
+	
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.gameObject.tag == "JumpTrigger" && enemyType == EnemyType.Jumping)
+		{
+			float blobY = GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().chaseY;
+			if((int)transform.position.y < (int)blobY)
+			{
+				Jump ();
+			}
+		}
 	}
 }

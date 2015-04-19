@@ -380,7 +380,7 @@ public class BlobMovement : MonoBehaviour
 			JumpTrigger.DirectionLimit dir = other.GetComponent<JumpTrigger>().directionLimit;
 			if(dir == JumpTrigger.DirectionLimit.None || (dir == JumpTrigger.DirectionLimit.Left && _faceDir == -1) || (dir == JumpTrigger.DirectionLimit.Right && _faceDir == 1))
 			{
-				if(food != null && food.transform.position.y > transform.position.y)
+				if((food != null && food.transform.position.y > transform.position.y) || other.GetComponent<JumpTrigger>().alwaysJump)
 				{
 					Jump ();	
 				}

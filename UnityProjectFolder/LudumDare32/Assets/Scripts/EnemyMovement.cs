@@ -112,6 +112,16 @@ public class EnemyMovement : MonoBehaviour
 			spriteRenderer.sprite = jumperSprite;
 		}
 
+		if (enemyType == EnemyType.Chasing) {
+
+			spriteRenderer.sprite = chaserSprite;
+		}
+
+		if (enemyType == EnemyType.Fleeing) {
+
+			spriteRenderer.sprite = fleeingSprite;
+		}
+
 		//Check to see if we've got horizontal input, or if we're dashing
 		if(isRunning)
 		{

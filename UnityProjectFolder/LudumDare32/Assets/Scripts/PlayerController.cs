@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour 
 {
 
+	public bool movedRight = true;
+
 	public int feedAmount = 0;
 
 	public int feedMax;
@@ -111,6 +113,25 @@ public class PlayerController : MonoBehaviour
 	
 	void Update()
 	{	
+
+		if (Input.GetAxis ("Horizontal") < 0) {
+
+			movedRight = false;
+		}
+
+		if (Input.GetAxis ("Horizontal") > 0) {
+
+			movedRight = true;
+		}
+
+		if (movedRight) {
+
+			transform.localScale = new Vector2(1, transform.localScale.y);
+		} else {
+
+			transform.localScale = new Vector2(-1, transform.localScale.y);
+		}
+
 		//Check to see if we've got horizontal input, or if we're dashing
 		if ((((Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f)) && canInput)) {
 			//This will determine the direction of horizontal raycasting

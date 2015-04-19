@@ -3,6 +3,13 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour 
 {
+
+	public SpriteRenderer spriteRenderer;
+
+	public Sprite jumperSprite;
+	public Sprite chaserSprite;
+	public Sprite fleeingSprite;
+
 	public enum EnemyType {Chasing, Jumping, Fleeing};
 	public EnemyType enemyType;
 	
@@ -99,6 +106,12 @@ public class EnemyMovement : MonoBehaviour
 	
 	void Update()
 	{	
+
+		if (enemyType == EnemyType.Jumping) {
+
+			spriteRenderer.sprite = jumperSprite;
+		}
+
 		//Check to see if we've got horizontal input, or if we're dashing
 		if(isRunning)
 		{

@@ -18,40 +18,33 @@ public class BlobMovement : MonoBehaviour
 	public float jumpHeight;
 
 	//Can we move?
-	public bool canMove;
+	[HideInInspector]public bool canMove;
 	//Are we on the ground?
-	public bool isGrounded;
+	[HideInInspector]public bool isGrounded;
 	//Are we jumping?
-	public bool canJump;
+	[HideInInspector]public bool canJump;
 	//Are we running?
-	public bool isRunning;
+	[HideInInspector]public bool isRunning;
 	//Are we eating?
-	public bool isEating;
+	[HideInInspector]public bool isEating;
 	//Are we evolving?
-	private bool isEvolving;
+	[HideInInspector]private bool isEvolving;
 
-	//Max health
-	public int maxHealth;
-	//Armour value
-	public int armour;
-	//Current health value
-	public int currentHealth;
-	
 	//Particles to explode the player
 	public Transform deadParticle;
 	//Child object which holds our animations	
 	public Transform playerAnimation;
 	//The animator for our child object
-	public Animator anim;
+	[HideInInspector]public Animator anim;
 	
 	//Have we cancelled our current jump?
 	private bool _jumpCancelled;
 	//Have we reached a wall?
-	public bool _atWall;
+	private bool _atWall;
 	//Are we jumping?
 	private bool _isJumping;
 	//Are we accepting input?
-	public bool canInput;
+	private bool canInput;
 	
 	//Is the player dead?
 	private bool _isDead;
@@ -60,7 +53,7 @@ public class BlobMovement : MonoBehaviour
 	//Maximum movement speed
 	private float _maxSpeed;
 	//Direction we are facing (-1 left, 1 right)
-	public float _faceDir;
+	private float _faceDir;
 	//The lowest we're currently allowed on the Y axis (used for slopes)
 	private float _minY;
 	//Length of our downward facing rays
@@ -70,24 +63,31 @@ public class BlobMovement : MonoBehaviour
 	//Our transforms y scale
 	private float yScale;
 	//Check which way walls are when dashing
-	public int _wallDir;
+	private int _wallDir;
 	
 	public GameObject food;
 	
 	private BoxCollider2D _boxCollider;
 	
-	public int enemiesEaten;
-	public int targetEnemies;
-	public int evolveLevel;
+	[HideInInspector]public int enemiesEaten;
+	[HideInInspector]public int targetEnemies;
+	[HideInInspector]public int evolveLevel;
 	
 	private float lastY;
-	public float chaseY;
+	[HideInInspector]public float chaseY;
 	private bool hasLanded;
+	public bool canDie;
+	
+	public int evolveOneTargets;
+	public int evolveTwoTargets;
+	private float evolvePercentage;
+	
+	private UIController uiController;
+	private GameController gameController;
 	
 	void OnGUI()
 	{
-		GUI.Label(new Rect(10,10,200,200),"Evolve Level: " + (evolveLevel+1).ToString() + " / 3");
-		GUI.Label (new Rect(10,30,200,200),"Enemies Eaten: " + enemiesEaten.ToString());
+		GUI.Label (new Rect(10,50,200,200),"Enemies Eaten: " + enemiesEaten.ToString());
 	}
 	
 	//Set stuff up at the start
@@ -101,11 +101,11 @@ public class BlobMovement : MonoBehaviour
 		//Player state is idle
 		playerState = PlayerState.Idle;
 		anim = playerAnimation.GetComponent<Animator>();
+		uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
+		gameController = Camera.main.GetComponent<GameController>();
 		//anim.SetInteger("animState",0);
 		//Previous state is also idle`
 		_lastState = playerState;
-		//Set health to max
-		currentHealth = maxHealth;
 
 		//Accept input
 		canInput = true;
@@ -115,7 +115,7 @@ public class BlobMovement : MonoBehaviour
 		//Get scales
 		xScale = transform.localScale.x / 2f;
 		yScale = transform.localScale.y;
-		targetEnemies = 2;
+		targetEnemies = evolveOneTargets;
 		FindFood();
 		
 	}
@@ -160,11 +160,14 @@ public class BlobMovement : MonoBehaviour
 		if(playerHit.collider != null && playerHit.collider.gameObject.tag == "Player")
 		{
 			isRunning = false;
+			canDie = true;
 		}
 		else
 		{
 			if(food != null && !isEating)
 				isRunning = true;
+			if(food != null)
+				canDie = false;
 		}
 		//Scale our animation to be facing the right direction
 		playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
@@ -393,9 +396,21 @@ public class BlobMovement : MonoBehaviour
 		}
 		if(other.gameObject.tag == "Enemy")
 		{
-			++enemiesEaten;
-			Destroy (other.gameObject);
-			StartCoroutine("Eat",false);
+			if(!canDie)
+			{
+				++enemiesEaten;
+				++gameController.score;
+				uiController.IncreaseEvolution();
+				Destroy (other.gameObject);
+				StartCoroutine("Eat",false);
+			}
+			else
+			{
+				Destroy(playerAnimation.gameObject);
+				gameController.GameOver();
+				Destroy(gameObject);
+				
+			}
 		}
 		
 		if(other.gameObject.tag == "Player")
@@ -409,7 +424,7 @@ public class BlobMovement : MonoBehaviour
 		isEating = true;
 		anim.SetInteger("animState",4);
 		isRunning = false;
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.5f);
 		isEating = false;
 		if(!isFood && food != null)
 		{
@@ -418,8 +433,10 @@ public class BlobMovement : MonoBehaviour
 			else
 				isRunning = true;
 		}
-		else
+		else if(isFood)
+		{
 			FindFood();
+		}
 	}
 	
 	public void FindFood()
@@ -434,7 +451,12 @@ public class BlobMovement : MonoBehaviour
 				else
 					_faceDir = 1;
 				chaseY = lastY;
+				canDie = false;
 				StartRunning();
+			}
+			else
+			{
+				canDie = true;
 			}
 		}
 	}
@@ -468,7 +490,7 @@ public class BlobMovement : MonoBehaviour
 				GetComponent<CircleCollider2D>().offset = new Vector2(0,-0.5f);
 				xScale = transform.localScale.x / 2f;
 				yScale = transform.localScale.y;
-				targetEnemies = 5;
+				targetEnemies = evolveTwoTargets;
 				break;
 			case 2:
 				transform.localScale = new Vector3(2,2,1);

@@ -31,6 +31,9 @@ public class ThrowFood : MonoBehaviour
 	
 	void CallPet()
 	{
-		GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
+		GameObject pet = GameObject.FindGameObjectWithTag("Blob");
+		if(pet != null)
+			pet.GetComponent<BlobMovement>().FindFood();
+		
 	}
 }

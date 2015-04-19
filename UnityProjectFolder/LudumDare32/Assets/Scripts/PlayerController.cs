@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour
 	
 	private BoxCollider2D _boxCollider;
 	
+	private GameController gameController;
+	
 	//Set stuff up at the start
 	void Start()
 	{
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
 		//Player state is idle
 		playerState = PlayerState.Idle;
 		anim = playerAnimation.GetComponent<Animator>();
+		gameController = Camera.main.GetComponent<GameController>();
 		//anim.SetInteger("animState",0);
 		//Previous state is also idle`
 		_lastState = playerState;
@@ -356,10 +359,9 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("You have died");
 			if(deadParticle != null)
 				Instantiate(deadParticle, transform.position, Quaternion.identity);
-			//   BLOB DEATH????                Instantiate(blob.gameObject.deadParticle, blob.transform.position, Quaternion.identity);
-
+			gameController.GameOver();
 			Destroy(gameObject);
-			Destroy(blob);
+//			Destroy(blob);
 		}
 
 		if (other.gameObject.tag == "Portal") {

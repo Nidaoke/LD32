@@ -345,14 +345,21 @@ public class EnemyMovement : MonoBehaviour
 	
 	void ChasePlayer()
 	{
-		float myY = Mathf.Round(transform.position.y * 2)/2;
-		float playerY = Mathf.Round(player.GetComponent<PlayerController>().lastY * 2)/2; 
-		if(myY == playerY)
+		if(player != null)
 		{
-			if(player.transform.position.x < transform.position.x)
-				_faceDir = -1;
+			float myY = Mathf.Round(transform.position.y * 2)/2;
+			float playerY = Mathf.Round(player.GetComponent<PlayerController>().lastY * 2)/2; 
+			if(myY == playerY)
+			{
+				if(player.transform.position.x < transform.position.x)
+					_faceDir = -1;
+				else
+					_faceDir = 1;
+			}
 			else
-				_faceDir = 1;
+			{
+				PickRandomDir();
+			}
 		}
 		else
 		{

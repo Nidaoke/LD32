@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
 			//This will determine the direction of horizontal raycasting
 			float checkDir = 0;
 			checkDir = Input.GetAxisRaw("Horizontal");
+			_faceDir = checkDir;
 			
 			//We are not at a wall
 			_atWall = false;
@@ -209,19 +210,12 @@ public class PlayerController : MonoBehaviour
 			Jump();
 		}
 		
-		if(Input.GetKeyDown(KeyCode.LeftControl) && isGrounded && canFeed)
+		if(Input.GetKeyDown(KeyCode.LeftControl) && canFeed)
 		{
-			GameObject[] foodCount = GameObject.FindGameObjectsWithTag("Food");
-			if(foodCount.Length == 0)
-			{
-				Instantiate(food,new Vector3(transform.position.x,transform.position.y -0.75f,0),Quaternion.identity);
-				GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
-			}else{
-
-				//Destroy(food);
-				Instantiate(food,new Vector3(transform.position.x,transform.position.y -0.75f,0),Quaternion.identity);
-				GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
-			}
+			Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
+			f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
+			
+			//GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
 		}
 		
 		//Set our player state and animation based on what we're currently doing

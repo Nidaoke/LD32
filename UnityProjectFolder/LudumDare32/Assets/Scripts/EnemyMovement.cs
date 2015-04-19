@@ -104,6 +104,19 @@ public class EnemyMovement : MonoBehaviour
 		{
 			//This will determine the direction of horizontal raycasting
 			float checkDir = _faceDir;
+			if(enemyType == EnemyType.Fleeing)
+			{
+				RaycastHit2D foodCheck = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y - ((xScale*2)- 0.1f),0), Vector3.right * checkDir, 1.0f, 1 << 11);
+				Debug.DrawRay(new Vector3(transform.position.x,transform.position.y - ((xScale*2) - 0.1f),0), Vector3.right * checkDir);
+				
+				if(foodCheck.collider != null && foodCheck.collider.gameObject.tag == "Food")
+				{
+					if(_faceDir == 1)
+						_faceDir = -1;
+					else
+						_faceDir = 1;
+				}
+			}
 			
 			//We are not at a wall
 			_atWall = false;
@@ -212,6 +225,10 @@ public class EnemyMovement : MonoBehaviour
 				if(enemyType == EnemyType.Chasing)
 				{
 					ChasePlayer();
+				}
+				else
+				{
+					PickRandomDir();
 				}
 			}
 		}
@@ -339,10 +356,15 @@ public class EnemyMovement : MonoBehaviour
 		}
 		else
 		{
-			_faceDir = Random.Range(0,2);
-			if(_faceDir == 0)
-				_faceDir = -1;
+			PickRandomDir();
 		}
+	}
+	
+	void PickRandomDir()
+	{
+		_faceDir = Random.Range(0,2);
+		if(_faceDir == 0)
+			_faceDir = -1;
 	}
 	
 	void StartRunning()

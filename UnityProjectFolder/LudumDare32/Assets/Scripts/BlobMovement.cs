@@ -409,7 +409,7 @@ public class BlobMovement : MonoBehaviour
 		isEating = true;
 		anim.SetInteger("animState",4);
 		isRunning = false;
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1.0f);
 		isEating = false;
 		if(!isFood && food != null)
 		{
@@ -424,15 +424,18 @@ public class BlobMovement : MonoBehaviour
 	
 	public void FindFood()
 	{
-		food = GameObject.FindGameObjectWithTag("Food");
-		if(food != null)
+		if(food == null)
 		{
-			if(food.transform.position.x < transform.position.x)
-				_faceDir = -1;
-			else
-				_faceDir = 1;
-			chaseY = lastY;
-			StartRunning();
+			food = GameObject.FindGameObjectWithTag("Food");
+			if(food != null)
+			{
+				if(food.transform.position.x < transform.position.x)
+					_faceDir = -1;
+				else
+					_faceDir = 1;
+				chaseY = lastY;
+				StartRunning();
+			}
 		}
 	}
 	

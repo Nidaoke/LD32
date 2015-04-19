@@ -337,6 +337,12 @@ public class EnemyMovement : MonoBehaviour
 			else
 				_faceDir = 1;
 		}
+		else
+		{
+			_faceDir = Random.Range(0,2);
+			if(_faceDir == 0)
+				_faceDir = -1;
+		}
 	}
 	
 	void StartRunning()

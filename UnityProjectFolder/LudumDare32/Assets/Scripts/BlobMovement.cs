@@ -168,6 +168,7 @@ public class BlobMovement : MonoBehaviour
 		}
 		//Scale our animation to be facing the right direction
 		playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
+		playerAnimation.transform.position = transform.position;
 		
 		if(canInput)
 		{
@@ -248,7 +249,7 @@ public class BlobMovement : MonoBehaviour
 			else
 			{
 				playerState = PlayerState.Running;
-				////anim.SetInteger("animState",1);
+				anim.SetInteger("animState",1);
 			}
 			if(!hasLanded)
 			{
@@ -408,7 +409,7 @@ public class BlobMovement : MonoBehaviour
 		isEating = true;
 		anim.SetInteger("animState",4);
 		isRunning = false;
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(0.5f);
 		isEating = false;
 		if(!isFood && food != null)
 		{

@@ -4,6 +4,10 @@ using System.Collections;
 public class PlayerController : MonoBehaviour 
 {
 
+	public int feedAmount = 0;
+
+	public int feedMax;
+
 	public bool canFeed = true;
 
 	public GameObject blob;
@@ -108,112 +112,107 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{	
 		//Check to see if we've got horizontal input, or if we're dashing
-		if((((Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)) && canInput))
-		{
+		if ((((Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f)) && canInput)) {
 			//This will determine the direction of horizontal raycasting
 			float checkDir = 0;
-			checkDir = Input.GetAxisRaw("Horizontal");
+			checkDir = Input.GetAxisRaw ("Horizontal");
 			_faceDir = checkDir;
 			
 			//We are not at a wall
 			_atWall = false;
 			//Raycast 5 rays horizontally
-			RaycastHit2D hit1 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y + (xScale/2f),0), Vector3.right * checkDir, 0.23f,1 << 8);
-			RaycastHit2D hit2 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y,0), Vector3.right * checkDir,xScale+0.03f, 1 << 8);
-			RaycastHit2D hit3 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y - (xScale/2f),0), Vector3.right * checkDir, 0.23f, 1 << 8);
-			RaycastHit2D hit4 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y - (xScale - 0.1f),0), Vector3.right * checkDir, xScale+0.03f, 1 << 8);
-			RaycastHit2D hit5 = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y + (xScale - 0.1f),0), Vector3.right * checkDir, xScale+0.03f, 1 << 8);
+			RaycastHit2D hit1 = Physics2D.Raycast (new Vector3 (transform.position.x, transform.position.y + (xScale / 2f), 0), Vector3.right * checkDir, 0.23f, 1 << 8);
+			RaycastHit2D hit2 = Physics2D.Raycast (new Vector3 (transform.position.x, transform.position.y, 0), Vector3.right * checkDir, xScale + 0.03f, 1 << 8);
+			RaycastHit2D hit3 = Physics2D.Raycast (new Vector3 (transform.position.x, transform.position.y - (xScale / 2f), 0), Vector3.right * checkDir, 0.23f, 1 << 8);
+			RaycastHit2D hit4 = Physics2D.Raycast (new Vector3 (transform.position.x, transform.position.y - (xScale - 0.1f), 0), Vector3.right * checkDir, xScale + 0.03f, 1 << 8);
+			RaycastHit2D hit5 = Physics2D.Raycast (new Vector3 (transform.position.x, transform.position.y + (xScale - 0.1f), 0), Vector3.right * checkDir, xScale + 0.03f, 1 << 8);
 			//Check to see if any of the rays have hit the environment
-			if(hit1.collider != null ||
-			   hit2.collider != null ||
-			   hit3.collider != null ||
-			   hit4.collider != null ||
-			   hit5.collider != null)
-			{
+			if (hit1.collider != null ||
+				hit2.collider != null ||
+				hit3.collider != null ||
+				hit4.collider != null ||
+				hit5.collider != null) {
 				
 				_wallDir = (int)checkDir;
 				_atWall = true;
 			}
-		}
-		else
-		{
+		} else {
 			_atWall = false;
 		}
 		
 		//Scale our animation to be facing the right direction
-		playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
+		playerAnimation.transform.localScale = new Vector3 (_faceDir, 1, 1);
 		
-		if(canInput)
-		{
-			float s = _currentSpeed/movementSpeed;
+		if (canInput) {
+			float s = _currentSpeed / movementSpeed;
 			//Surely there's an easier way to clamp it to max/min
-			if(Input.GetAxisRaw("Horizontal") > 0.5f)
-				s +=playerSlide;
-			else if(Input.GetAxisRaw("Horizontal") < -0.5f)
-				s -=playerSlide;
-			else
-			{
-				if(s > 0.1f)
+			if (Input.GetAxisRaw ("Horizontal") > 0.5f)
+				s += playerSlide;
+			else if (Input.GetAxisRaw ("Horizontal") < -0.5f)
+				s -= playerSlide;
+			else {
+				if (s > 0.1f)
 					s -= playerSlide;
-				else if(s < -0.1f)
+				else if (s < -0.1f)
 					s += playerSlide;
-				else s = 0;
+				else
+					s = 0;
 			}
 			float cSpeed = s;
 			//Clamp our 'cSpeed'
-			if(cSpeed > 1f)
+			if (cSpeed > 1f)
 				cSpeed = 1f;
-			if(cSpeed < -1f)
+			if (cSpeed < -1f)
 				cSpeed = -1f;
 			//And times it by our movement speed
 			_currentSpeed = movementSpeed * cSpeed;
 		}
 		
 		//If we're at a wall we set our movement speed to 0
-		if(_atWall)
+		if (_atWall)
 			_currentSpeed = 0;
 		
 		//Create a float and set it to a stupidly lowf number
 		float topRay = Mathf.NegativeInfinity;
 		
 		//If we're not jumping, and we haven't started a jump
-		if(!_isJumping && !canJump)
-		{
+		if (!_isJumping && !canJump) {
 			//Cast two rays down
-			RaycastHit2D hitD1 = Physics2D.Raycast (new Vector3 (transform.position.x + (xScale-0.1f), transform.position.y - (yScale - 0.1f), 0), -Vector3.up, _dRay,1 << 8);
-			RaycastHit2D hitD2 = Physics2D.Raycast (new Vector3 (transform.position.x - (xScale-0.1f), transform.position.y - (yScale - 0.1f), 0), -Vector3.up, _dRay, 1 << 8);
-			Debug.DrawRay(new Vector3(transform.position.x + (xScale-0.1f), transform.position.y - (yScale - 0.1f),0),-Vector3.up);
+			RaycastHit2D hitD1 = Physics2D.Raycast (new Vector3 (transform.position.x + (xScale - 0.1f), transform.position.y - (yScale - 0.1f), 0), -Vector3.up, _dRay, 1 << 8);
+			RaycastHit2D hitD2 = Physics2D.Raycast (new Vector3 (transform.position.x - (xScale - 0.1f), transform.position.y - (yScale - 0.1f), 0), -Vector3.up, _dRay, 1 << 8);
+			Debug.DrawRay (new Vector3 (transform.position.x + (xScale - 0.1f), transform.position.y - (yScale - 0.1f), 0), -Vector3.up);
 			//Check to see if either of the rays have hit
-			if((hitD1.collider != null) || 
-			   (hitD2.collider != null))
-			{
+			if ((hitD1.collider != null) || 
+				(hitD2.collider != null)) {
 				
 				//Set the 'topRay' to where the first ray hit
-				if(hitD1.collider != null)
+				if (hitD1.collider != null)
 					topRay = hitD1.point.y;
 				//If the second ray hit a higher position, set 'topRay' to there instead
-				if(hitD2.collider != null && hitD2.point.y > topRay)
+				if (hitD2.collider != null && hitD2.point.y > topRay)
 					topRay = hitD2.point.y;
 				//If we have set the 'topRay' this frame, our lowest Y position is set to that point
-				if(topRay > Mathf.NegativeInfinity)
+				if (topRay > Mathf.NegativeInfinity)
 					_minY = topRay;
 				//We are touching the ground
 				isGrounded = true;			
-			}
-			else
-			{
+			} else {
 				//None of the rays hit, so we're not on the ground
 				isGrounded = false;
 			}
 		}
 		
 		//If we press jump, and we're either grounded or allowed a second jump
-		if(Input.GetButtonDown("Jump"))
-		{	
-			Jump();
+		if (Input.GetButtonDown ("Jump")) {	
+			Jump ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.LeftControl)) {
+
+			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
 		}
 		
-		if(Input.GetKeyDown(KeyCode.LeftControl) && canFeed)
+		if(Input.GetKeyDown(KeyCode.LeftControl) && canFeed && feedAmount <= (feedMax - 1)) //For some reason it keeps adding one to it, that's fine though.
 		{
 			Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
 			f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);

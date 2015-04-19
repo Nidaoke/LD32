@@ -265,12 +265,12 @@ public class BlobMovement : MonoBehaviour
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
-				//anim.SetInteger("animState",2);
+				anim.SetInteger("animState",2);
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
-				//anim.SetInteger("animState",3);
+				anim.SetInteger("animState",3);
 			}
 		}
 		

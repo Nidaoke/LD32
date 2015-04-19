@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 1292bc0546c949942bdca012ece7535e
+timeCreated: 1429471061
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Treat Animation_0
+    21300002: Treat Animation_1
+    21300004: Treat Animation_2
+    21300006: Treat Animation_3
+    21300008: Treat Animation_4
+    21300010: Treat Animation_5
+    21300012: Treat Animation_6
+    21300014: Treat Animation_7
+    21300016: Treat Animation_8
+    21300018: Treat Animation_9
+    21300020: Treat Animation_10
+    21300022: Treat Animation_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Treat Animation_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 161
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_1
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 161
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_2
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 153
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_3
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 169
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_4
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 179
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 192
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_6
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 41
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_7
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 33
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_8
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_9
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 28
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_10
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 15
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Treat Animation_11
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 64
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

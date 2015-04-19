@@ -360,8 +360,8 @@ public class PlayerController : MonoBehaviour
 		if(other.gameObject.tag == "Enemy")// || other.gameObject.tag == "Blob")
 		{
 			Debug.Log("You have died");
-
-			Instantiate(deadParticle, transform.position, Quaternion.identity);
+			if(deadParticle != null)
+				Instantiate(deadParticle, transform.position, Quaternion.identity);
 			//   BLOB DEATH????                Instantiate(blob.gameObject.deadParticle, blob.transform.position, Quaternion.identity);
 
 			Destroy(gameObject);

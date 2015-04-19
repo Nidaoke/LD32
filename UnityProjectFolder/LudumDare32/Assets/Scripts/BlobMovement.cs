@@ -163,7 +163,7 @@ public class BlobMovement : MonoBehaviour
 		}
 		else
 		{
-			if(food != null)
+			if(food != null && !isEating)
 				isRunning = true;
 		}
 		//Scale our animation to be facing the right direction
@@ -408,7 +408,7 @@ public class BlobMovement : MonoBehaviour
 		isEating = true;
 		anim.SetInteger("animState",4);
 		isRunning = false;
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(3.0f);
 		isEating = false;
 		if(!isFood && food != null)
 		{

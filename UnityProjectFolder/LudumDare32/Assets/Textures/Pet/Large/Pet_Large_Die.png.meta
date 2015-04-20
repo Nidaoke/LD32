@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ec1da63113df8e546817a22c8db60bf2
 timeCreated: 1429572887
 licenseType: Free
@@ -8,6 +9,13 @@ TextureImporter:
     21300002: Pet_Large_Die_1
     21300004: Pet_Large_Die_2
     21300006: Pet_Large_Die_3
+=======
+guid: 92fedeaba3c866147b0841c9f975eacf
+timeCreated: 1429569938
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName: {}
+>>>>>>> origin/master
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,6 +38,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: -3
   maxTextureSize: 8192
   textureSettings:
@@ -42,12 +51,27 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   spriteMode: 2
+=======
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: -1
+  nPOTScale: 1
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 0
+>>>>>>> origin/master
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+<<<<<<< HEAD
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -93,6 +117,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+=======
+  alphaIsTransparency: 0
+  textureType: -1
+  buildTargetSettings: []
+  spriteSheet:
+    sprites: []
+>>>>>>> origin/master
   spritePackingTag: 
   userData: 
   assetBundleName: 

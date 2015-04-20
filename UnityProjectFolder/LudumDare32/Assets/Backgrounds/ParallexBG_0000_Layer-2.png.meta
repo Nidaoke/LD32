@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: d909eab2da6a06b4fb777ef450bced35
-timeCreated: 1429484588
+guid: cfa6011d0631b5a449739d53d9fe4300
+timeCreated: 1429554933
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Pet_Small_Fall_0
-    21300002: Pet_Small_Fall_1
-    21300004: Pet_Small_Fall_2
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -29,10 +26,10 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
-  maxTextureSize: 2048
+  textureFormat: -3
+  maxTextureSize: 8192
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -40,48 +37,18 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 35
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: Pet_Small_Fall_0
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 6
-        width: 43
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Pet_Small_Fall_1
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 5
-        width: 43
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Pet_Small_Fall_2
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 4
-        width: 42
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

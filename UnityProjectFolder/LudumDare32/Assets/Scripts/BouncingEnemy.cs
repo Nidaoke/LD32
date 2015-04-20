@@ -5,6 +5,8 @@ public class BouncingEnemy : MonoBehaviour
 {
 	private float hSpeed;
 	private float vSpeed;
+
+	public GameObject deathEffect;
 	
 	void Start()
 	{
@@ -49,5 +51,11 @@ public class BouncingEnemy : MonoBehaviour
 		{
 			vSpeed = Random.Range (-7f,7f);
 		}
+	}
+
+	void OnDestroy(){
+
+		Debug.Log ("Bouncer Killed");
+		Instantiate (deathEffect, transform.position, Quaternion.identity);
 	}
 }

@@ -4,11 +4,7 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour 
 {
 
-	public SpriteRenderer spriteRenderer;
-
-	public Sprite jumperSprite;
-	public Sprite chaserSprite;
-	public Sprite fleeingSprite;
+	public GameObject deathEffect;
 
 	public enum EnemyType {Chasing, Jumping, Fleeing};
 	public EnemyType enemyType;
@@ -107,20 +103,7 @@ public class EnemyMovement : MonoBehaviour
 	void Update()
 	{	
 
-		if (enemyType == EnemyType.Jumping) {
 
-			spriteRenderer.sprite = jumperSprite;
-		}
-
-		if (enemyType == EnemyType.Chasing) {
-
-			spriteRenderer.sprite = chaserSprite;
-		}
-
-		if (enemyType == EnemyType.Fleeing) {
-
-			spriteRenderer.sprite = fleeingSprite;
-		}
 
 		//Check to see if we've got horizontal input, or if we're dashing
 		if(isRunning)
@@ -240,7 +223,7 @@ public class EnemyMovement : MonoBehaviour
 			else
 			{
 				playerState = PlayerState.Running;
-				////anim.SetInteger("animState",1);
+				anim.SetInteger("animState",1);
 			}
 			if(!hasLanded)
 			{
@@ -260,13 +243,13 @@ public class EnemyMovement : MonoBehaviour
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
-				//anim.SetInteger("animState",2);
+				anim.SetInteger("animState",2);
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
 				hasLanded = false;
-				//anim.SetInteger("animState",3);
+				anim.SetInteger("animState",3);
 			}
 		}
 		
@@ -419,5 +402,10 @@ public class EnemyMovement : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	void OnDestroy(){
+
+		Instantiate (deathEffect, transform.position, Quaternion.identity);
 	}
 }

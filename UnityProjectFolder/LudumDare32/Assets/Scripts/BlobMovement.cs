@@ -239,6 +239,8 @@ public class BlobMovement : MonoBehaviour
 				playerState = PlayerState.Eating;
 				anim.SetInteger("animState",4);
 			}
+
+
 			else if(isEvolving)
 			{
 				playerState = PlayerState.Evolving;

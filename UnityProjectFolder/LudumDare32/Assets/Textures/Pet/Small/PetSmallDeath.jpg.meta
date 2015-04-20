@@ -1,21 +1,19 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: ec1da63113df8e546817a22c8db60bf2
-timeCreated: 1429572887
+guid: 73d90df45e6d0ee47bce8d18968830cd
+timeCreated: 1429573033
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Pet_Large_Die_0
-    21300002: Pet_Large_Die_1
-    21300004: Pet_Large_Die_2
-    21300006: Pet_Large_Die_3
-=======
-guid: 92fedeaba3c866147b0841c9f975eacf
-timeCreated: 1429569938
-licenseType: Free
-TextureImporter:
-  fileIDToRecycleName: {}
->>>>>>> origin/master
+    21300000: PetSmallDeath_0
+    21300002: PetSmallDeath_1
+    21300004: PetSmallDeath_2
+    21300006: PetSmallDeath_3
+    21300008: PetSmallDeath_4
+    21300010: PetSmallDeath_5
+    21300012: PetSmallDeath_6
+    21300014: PetSmallDeath_7
+    21300016: PetSmallDeath_8
+    21300018: PetSmallDeath_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +36,6 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-<<<<<<< HEAD
   textureFormat: -3
   maxTextureSize: 8192
   textureSettings:
@@ -51,33 +48,18 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   spriteMode: 2
-=======
-  textureFormat: -1
-  maxTextureSize: 2048
-  textureSettings:
-    filterMode: -1
-    aniso: -1
-    mipBias: -1
-    wrapMode: -1
-  nPOTScale: 1
-  lightmap: 0
-  rGBM: 0
-  compressionQuality: 50
-  spriteMode: 0
->>>>>>> origin/master
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
-<<<<<<< HEAD
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Pet_Large_Die_0
+    - name: PetSmallDeath_0
       rect:
         serializedVersion: 2
         x: 0
@@ -87,7 +69,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Pet_Large_Die_1
+    - name: PetSmallDeath_1
       rect:
         serializedVersion: 2
         x: 135
@@ -97,7 +79,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Pet_Large_Die_2
+    - name: PetSmallDeath_2
       rect:
         serializedVersion: 2
         x: 270
@@ -107,7 +89,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Pet_Large_Die_3
+    - name: PetSmallDeath_3
       rect:
         serializedVersion: 2
         x: 405
@@ -117,13 +99,66 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-=======
-  alphaIsTransparency: 0
-  textureType: -1
-  buildTargetSettings: []
-  spriteSheet:
-    sprites: []
->>>>>>> origin/master
+    - name: PetSmallDeath_4
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_5
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_6
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_7
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_8
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_9
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

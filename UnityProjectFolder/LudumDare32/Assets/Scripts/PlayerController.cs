@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour 
 {
 
+	public int animStateShow;
+
 	public bool movedRight = true;
 
 	public int feedAmount = 0;
@@ -115,6 +117,8 @@ public class PlayerController : MonoBehaviour
 	
 	void Update()
 	{	
+
+		animStateShow = anim.GetInteger ("animState");
 
 		if (Input.GetAxis ("Horizontal") < 0) {
 
@@ -237,6 +241,9 @@ public class PlayerController : MonoBehaviour
 			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
 			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
 			{
+
+				//anim.SetInteger("animState", 5);
+
 				Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
 				f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
 			}
@@ -253,7 +260,7 @@ public class PlayerController : MonoBehaviour
 			else
 			{
 				playerState = PlayerState.Running;
-				////anim.SetInteger("animState",1);
+				anim.SetInteger("animState",1);
 			}
 			if(!hasLanded)
 			{
@@ -266,14 +273,19 @@ public class PlayerController : MonoBehaviour
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
-				//anim.SetInteger("animState",2);
+				anim.SetInteger("animState",2);
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
 				hasLanded = false;
-				//anim.SetInteger("animState",3);
+				anim.SetInteger("animState",3);
 			}
+		}
+
+		if (playerState == PlayerState.Running) {
+
+			anim.SetInteger("animState", 1);
 		}
 		
 		//Reset isJumping if we're not actually jumping
@@ -361,7 +373,7 @@ public class PlayerController : MonoBehaviour
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;
-			//anim.SetInteger("animState",2);
+			anim.SetInteger("animState",2);
 			//We are now jumoing
 			_isJumping = true;
 			//We are not on the ground

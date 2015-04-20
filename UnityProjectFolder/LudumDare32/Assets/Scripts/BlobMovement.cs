@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BlobMovement : MonoBehaviour 
 {
+	public GameObject deathEffect;
+
 	//List of player states
 	public enum PlayerState {Idle, Running, Jumping, Falling, Eating, Damaged, Evolving};
 	//Current state
@@ -94,6 +96,11 @@ public class BlobMovement : MonoBehaviour
 	void OnGUI()
 	{
 		GUI.Label (new Rect(10,90,200,200),playerState.ToString());
+	}
+
+	void OnDestroy(){
+
+		Instantiate (deathEffect, transform.position, Quaternion.identity);
 	}
 
 	//Set stuff up at the start

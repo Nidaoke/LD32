@@ -4,6 +4,8 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour 
 {
 
+	//public SpriteRenderer spriteRenderer;
+
 	public GameObject deathEffect;
 
 	public enum EnemyType {Chasing, Jumping, Fleeing};
@@ -110,6 +112,17 @@ public class EnemyMovement : MonoBehaviour
 		{
 			//This will determine the direction of horizontal raycasting
 			float checkDir = _faceDir;
+
+			if (checkDir == -1) {
+				
+				transform.localScale = new Vector2(-1, transform.localScale.y);
+			}
+			
+			if (checkDir == 1) {
+				
+				transform.localScale = new Vector2(1, transform.localScale.y);
+			}
+
 			if(enemyType == EnemyType.Fleeing)
 			{
 				RaycastHit2D foodCheck = Physics2D.Raycast (transform.position, Vector3.right * checkDir, 1.0f, 1 << 11);
@@ -118,9 +131,9 @@ public class EnemyMovement : MonoBehaviour
 				if(foodCheck.collider != null && foodCheck.collider.gameObject.tag == "Food")
 				{
 					if(_faceDir == 1)
-						_faceDir = -1;
+						_faceDir = -2;
 					else
-						_faceDir = 1;
+						_faceDir = 2;
 				}
 			}
 			

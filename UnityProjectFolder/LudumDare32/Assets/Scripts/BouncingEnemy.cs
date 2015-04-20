@@ -15,6 +15,16 @@ public class BouncingEnemy : MonoBehaviour
 	
 	void Update()
 	{
+		if (hSpeed > 0) {
+
+			transform.localScale = new Vector2(1, transform.localScale.y);
+		}
+
+		if (hSpeed < 0) {
+			
+			transform.localScale = new Vector2(-1, transform.localScale.y);
+		}
+
 		RaycastHit2D hitV1 = Physics2D.Raycast(new Vector3(transform.position.x + 0.4f,transform.position.y,0),Vector3.up * vSpeed,0.6f,1<<8);
 		RaycastHit2D hitV2 = Physics2D.Raycast(new Vector3(transform.position.x,transform.position.y,0),Vector3.up * vSpeed,0.6f,1<<8);
 		RaycastHit2D hitV3 = Physics2D.Raycast(new Vector3(transform.position.x - 0.4f,transform.position.y,0),Vector3.up * vSpeed,0.6f,1<<8);

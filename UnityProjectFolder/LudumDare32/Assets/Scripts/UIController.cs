@@ -19,6 +19,10 @@ public class UIController : MonoBehaviour
 		SetImage();
 	}
 	
+	void Update()
+	{
+		UpdateImages();
+	}
 	public void IncreaseEvolution()
 	{
 		++currentEvo;
@@ -41,7 +45,7 @@ public class UIController : MonoBehaviour
 		petImage.GetComponent<Image>().sprite = petSprites[image];
 	}
 	
-	public void UpdateImages()
+	void UpdateImages()
 	{
 		GameObject[] food = GameObject.FindGameObjectsWithTag("Food");
 		for(int x = 0; x < 3; ++x)

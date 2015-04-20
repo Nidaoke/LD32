@@ -46,6 +46,8 @@ public class BlobMovement : MonoBehaviour
 	//Are we accepting input?
 	private bool canInput;
 	
+	private bool evolveCooldown;
+	
 	//Is the player dead?
 	private bool _isDead;
 	//Current movement speed
@@ -71,7 +73,7 @@ public class BlobMovement : MonoBehaviour
 	
 	[HideInInspector]public int enemiesEaten;
 	[HideInInspector]public int targetEnemies;
-	[HideInInspector]public int evolveLevel;
+	public int evolveLevel;
 	
 	private float lastY;
 	[HideInInspector]public float chaseY;
@@ -85,6 +87,7 @@ public class BlobMovement : MonoBehaviour
 	private UIController uiController;
 	private GameController gameController;
 	
+	public RuntimeAnimatorController smallController;
 	public RuntimeAnimatorController midController;
 	public RuntimeAnimatorController largeController;
 	
@@ -415,10 +418,20 @@ public class BlobMovement : MonoBehaviour
 			}
 			else
 			{
-				Destroy(playerAnimation.gameObject);
-				gameController.GameOver();
-				Destroy(gameObject);
-				
+				if(evolveLevel == 0)
+				{
+					if(!evolveCooldown)
+					{
+						Destroy(playerAnimation.gameObject);
+						gameController.GameOver();
+						Destroy(gameObject);
+					}
+				}
+				else 
+				{
+					--evolveLevel;
+					StartCoroutine("Evolve");
+				}
 			}
 		}
 		
@@ -431,8 +444,6 @@ public class BlobMovement : MonoBehaviour
 	IEnumerator Eat(bool isFood)
 	{
 		isEating = true;
-		if(isFood)
-			uiController.UpdateImages();
 		anim.SetInteger("animState",4);
 		isRunning = false;
 		yield return new WaitForSeconds(0.3f);
@@ -440,7 +451,10 @@ public class BlobMovement : MonoBehaviour
 		if(!isFood && food != null)
 		{
 			if(enemiesEaten == targetEnemies)
+			{
+				++evolveLevel;
 				StartCoroutine("Evolve");
+			}
 			else
 				isRunning = true;
 		}
@@ -493,12 +507,10 @@ public class BlobMovement : MonoBehaviour
 	
 	void CheckFood()
 	{
-		Debug.Log("Checking platform");
 		RaycastHit2D myHit = Physics2D.Raycast(transform.position,-Vector3.up,3.0f,1<<8);
 		if(myHit.collider != null)
 		{
 			GameObject myPlatform = myHit.collider.gameObject;
-			Debug.Log(myPlatform.name);
 			GameObject[] allFood = GameObject.FindGameObjectsWithTag("Food");
 			
 			foreach(GameObject f in allFood)
@@ -520,15 +532,25 @@ public class BlobMovement : MonoBehaviour
 		if(evolveLevel < 2)
 		{
 			isEvolving = true;
-			++evolveLevel;
 			switch(evolveLevel)
 			{
+			case 0:
+				StartCoroutine("EvolveCooldown");
+				transform.localScale = new Vector3(1,1,1);
+				GetComponent<CircleCollider2D>().offset = new Vector2(0,0);
+				xScale = transform.localScale.x /2f;
+				yScale = transform.localScale.y;
+				targetEnemies = enemiesEaten + evolveOneTargets;
+				anim.runtimeAnimatorController = smallController;
+				anim.SetInteger("animState",0);
+				GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>().SetPetImage(evolveLevel);
+				break;
 			case 1:
 				transform.localScale = new Vector3(1,1,1);
 				GetComponent<CircleCollider2D>().offset = new Vector2(0,-0.5f);
 				xScale = transform.localScale.x / 2f;
 				yScale = transform.localScale.y;
-				targetEnemies = evolveTwoTargets;
+				targetEnemies = enemiesEaten + evolveTwoTargets;
 				anim.runtimeAnimatorController = midController;
 				anim.SetInteger("animState",0);
 				GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>().SetPetImage(evolveLevel);
@@ -546,5 +568,12 @@ public class BlobMovement : MonoBehaviour
 			isEvolving = false;
 			isRunning = true;
 		}
+	}
+	
+	IEnumerator EvolveCooldown()
+	{
+		evolveCooldown = true;
+		yield return new WaitForSeconds(2.0f);
+		evolveCooldown = false;
 	}
 }

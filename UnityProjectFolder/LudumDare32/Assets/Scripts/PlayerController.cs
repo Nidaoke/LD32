@@ -239,7 +239,6 @@ public class PlayerController : MonoBehaviour
 			{
 				Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
 				f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
-				uiController.GetComponent<UIController>().UpdateImages();
 			}
 		}
 		

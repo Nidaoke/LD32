@@ -258,6 +258,7 @@ public class BlobMovement : MonoBehaviour
 			{
 				hasLanded = true;
 				SetY();
+				CheckFood();
 			}
 		}
 		else 
@@ -298,7 +299,10 @@ public class BlobMovement : MonoBehaviour
 		
 		//Making the players head a trigger when falling. This stops him from getting stuck on walls
 		if(playerState == PlayerState.Falling)
+		{
+			hasLanded = false;
 			_boxCollider.isTrigger = true;
+		}
 		else
 			_boxCollider.isTrigger = false;
 		
@@ -459,6 +463,8 @@ public class BlobMovement : MonoBehaviour
 				canDie = true;
 			}
 		}
+		
+		CheckFood();
 	}
 	
 	void SetY()
@@ -474,6 +480,30 @@ public class BlobMovement : MonoBehaviour
 		case 2:
 			lastY = transform.position.y - 1;
 			break;
+		}
+	}
+	
+	void CheckFood()
+	{
+		Debug.Log("Checking platform");
+		RaycastHit2D myHit = Physics2D.Raycast(transform.position,-Vector3.up,3.0f,1<<8);
+		if(myHit.collider != null)
+		{
+			GameObject myPlatform = myHit.collider.gameObject;
+			Debug.Log(myPlatform.name);
+			GameObject[] allFood = GameObject.FindGameObjectsWithTag("Food");
+			
+			foreach(GameObject f in allFood)
+			{
+				if(f != null && f.GetComponent<ThrowFood>().currentPlatform == myPlatform)
+				{
+					Debug.Log("Sharing platform");
+					if(f.transform.position.x > transform.position.x)
+						_faceDir = 1;
+					else
+						_faceDir = -1;
+				}
+			}
 		}
 	}
 	

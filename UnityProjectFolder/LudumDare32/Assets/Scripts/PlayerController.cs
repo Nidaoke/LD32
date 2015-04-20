@@ -396,7 +396,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerExit2D(Collider2D col) {
 
-		Debug.Log ("Exited Trigger");
+//		Debug.Log ("Exited Trigger");
 
 		if (col.gameObject.tag == "Portal") {
 

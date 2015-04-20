@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpawnController : MonoBehaviour 
 {
-	public Transform enemy;
+	public Transform[] enemies;
 	public GameObject[] spawnPoints;
 	
 	void Start () 
@@ -14,7 +14,8 @@ public class SpawnController : MonoBehaviour
 	IEnumerator SpawnEnemy()
 	{
 		int spawnPos = Random.Range (0,spawnPoints.Length);
-		Instantiate(enemy,spawnPoints[spawnPos].transform.position,Quaternion.identity);
+		int enemy = Random.Range(0,enemies.Length);
+		Instantiate(enemies[enemy],spawnPoints[spawnPos].transform.position,Quaternion.identity);
 		
 		yield return new WaitForSeconds(3.0f);
 		StartCoroutine("SpawnEnemy");

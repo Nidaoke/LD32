@@ -5,6 +5,8 @@ public class ThrowFood : MonoBehaviour
 {
 	public bool isGrounded;
 	
+	public GameObject currentPlatform;
+	
 	void Update()
 	{
 		if(!isGrounded)
@@ -18,7 +20,15 @@ public class ThrowFood : MonoBehaviour
 				hit3.collider != null)
 				{
 					isGrounded = true;
+					if(hit1.collider != null)
+						currentPlatform = hit1.collider.gameObject;
+					else if(hit2.collider != null)
+						currentPlatform = hit2.collider.gameObject;
+					else
+						currentPlatform = hit3.collider.gameObject;
+						
 					GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+					
 					CallPet();
 				}
 		}

@@ -129,8 +129,8 @@ public class EnemyMovement : MonoBehaviour
 			float checkDir = _faceDir;
 			if(enemyType == EnemyType.Fleeing)
 			{
-				RaycastHit2D foodCheck = Physics2D.Raycast (new Vector3(transform.position.x,transform.position.y - ((xScale*2)- 0.1f),0), Vector3.right * checkDir, 1.0f, 1 << 11);
-				Debug.DrawRay(new Vector3(transform.position.x,transform.position.y - ((xScale*2) - 0.1f),0), Vector3.right * checkDir);
+				RaycastHit2D foodCheck = Physics2D.Raycast (transform.position, Vector3.right * checkDir, 1.0f, 1 << 11);
+				Debug.DrawRay(transform.position, Vector3.right * checkDir);
 				
 				if(foodCheck.collider != null && foodCheck.collider.gameObject.tag == "Food")
 				{

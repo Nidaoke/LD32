@@ -71,8 +71,8 @@ public class BlobMovement : MonoBehaviour
 	
 	private BoxCollider2D _boxCollider;
 	
-	[HideInInspector]public int enemiesEaten;
-	[HideInInspector]public int targetEnemies;
+	public int enemiesEaten;
+	public int targetEnemies;
 	public int evolveLevel;
 	
 	private float lastY;

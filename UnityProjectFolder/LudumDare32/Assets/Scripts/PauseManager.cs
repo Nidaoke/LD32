@@ -3,12 +3,12 @@ using System.Collections;
 
 public class PauseManager : MonoBehaviour {
 
-	public bool isPaused = false;
+	//Made this static so that anyone can see when the game is paused
+	public static bool isPaused = false;
 
 	void Update(){
 
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-
+		if (Input.GetButtonDown("Quit")) {
 			Application.Quit();
 		}
 
@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour {
 			Time.timeScale = 1f;
 		}
 
-		if (Input.GetKeyDown (KeyCode.P)) {
+		if (Input.GetButtonDown("Pause")) {
 
 			if(Application.loadedLevel != 0){
 

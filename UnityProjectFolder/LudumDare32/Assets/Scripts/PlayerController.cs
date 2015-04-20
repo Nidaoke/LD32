@@ -224,21 +224,20 @@ public class PlayerController : MonoBehaviour
 		}
 		
 		//If we press jump, and we're either grounded or allowed a second jump
-		if (Input.GetButtonDown ("Jump")) {	
+		if (Input.GetButtonDown ("Jump") && canInput) 
+		{	
 			Jump ();
 		}
-
-		if (Input.GetKeyDown (KeyCode.LeftControl)) {
-
-			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
-		}
 		
-		if(Input.GetKeyDown(KeyCode.LeftControl) && canFeed && feedAmount <= (feedMax - 1)) //For some reason it keeps adding one to it, that's fine though.
+		//Moved throw into a single check. Get count of food, then throw if there's not too many
+		if(Input.GetButtonDown("Throw") && canFeed && canInput) 
 		{
-			Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
-			f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
-			
-			//GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().FindFood();
+			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
+			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
+			{
+				Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
+				f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
+			}
 		}
 		
 		//Set our player state and animation based on what we're currently doing
@@ -356,7 +355,7 @@ public class PlayerController : MonoBehaviour
 	
 	void Jump()
 	{
-		if(isGrounded && canInput)
+		if(isGrounded)
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;

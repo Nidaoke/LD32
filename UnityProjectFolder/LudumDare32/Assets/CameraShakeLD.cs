@@ -17,7 +17,7 @@ public class CameraShakeLD : MonoBehaviour {
 
 		if (mShakeTime > 0) {
 
-			tsransform.position = mStartingPosition + (Random.insideUnitSphere * strength);
+			transform.position = mStartingPosition + (Random.insideUnitSphere * strength);
 
 			mShakeTime -= Time.deltaTime;
 		} else {

@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: ad977ca3ca99a33499fcfd58f997cd4d
+timeCreated: 1429515045
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Pet_Large_Eat_0
+    21300002: Pet_Large_Eat_1
+    21300004: Pet_Large_Eat_2
+    21300006: Pet_Large_Eat_3
+    21300008: Pet_Large_Eat_4
+    21300010: Pet_Large_Eat_5
+    21300012: Pet_Large_Eat_6
+    21300014: Pet_Large_Eat_7
+    21300016: Pet_Large_Eat_8
+    21300018: Pet_Large_Eat_9
+    21300020: Pet_Large_Eat_10
+    21300022: Pet_Large_Eat_11
+    21300024: Pet_Large_Eat_12
+    21300026: Pet_Large_Eat_13
+    21300028: Pet_Large_Eat_14
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 20
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Pet_Large_Eat_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_1
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_2
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_3
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_4
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_5
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_6
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_7
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_8
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_9
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_10
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_11
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_12
+      rect:
+        serializedVersion: 2
+        x: 2376
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_13
+      rect:
+        serializedVersion: 2
+        x: 2574
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pet_Large_Eat_14
+      rect:
+        serializedVersion: 2
+        x: 2772
+        y: 0
+        width: 198
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

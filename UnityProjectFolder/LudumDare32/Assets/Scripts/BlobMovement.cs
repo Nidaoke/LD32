@@ -85,11 +85,14 @@ public class BlobMovement : MonoBehaviour
 	private UIController uiController;
 	private GameController gameController;
 	
+	public RuntimeAnimatorController midController;
+	public RuntimeAnimatorController largeController;
+	
 	void OnGUI()
 	{
-		GUI.Label (new Rect(10,50,200,200),"Enemies Eaten: " + enemiesEaten.ToString());
+		GUI.Label (new Rect(10,90,200,200),playerState.ToString());
 	}
-	
+
 	//Set stuff up at the start
 	void Start()
 	{
@@ -103,7 +106,7 @@ public class BlobMovement : MonoBehaviour
 		anim = playerAnimation.GetComponent<Animator>();
 		uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
 		gameController = Camera.main.GetComponent<GameController>();
-		//anim.SetInteger("animState",0);
+		anim.SetInteger("animState",0);
 		//Previous state is also idle`
 		_lastState = playerState;
 
@@ -241,11 +244,11 @@ public class BlobMovement : MonoBehaviour
 			}
 
 
-			else if(isEvolving)
-			{
-				playerState = PlayerState.Evolving;
-				//SET ANIMATION
-			}
+//			else if(isEvolving)
+//			{
+//				playerState = PlayerState.Evolving;
+//				//SET ANIMATION
+//			}
 			else if(GetComponent<Rigidbody2D>().velocity.x == 0)
 			{
 				playerState = PlayerState.Idle;
@@ -365,7 +368,7 @@ public class BlobMovement : MonoBehaviour
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;
-			//anim.SetInteger("animState",2);
+			anim.SetInteger("animState",2);
 			//We are now jumoing
 			_isJumping = true;
 			//We are not on the ground
@@ -405,7 +408,7 @@ public class BlobMovement : MonoBehaviour
 			if(!canDie)
 			{
 				++enemiesEaten;
-				++gameController.score;
+				gameController.AddScre(1);
 				uiController.IncreaseEvolution();
 				Destroy (other.gameObject);
 				StartCoroutine("Eat",false);
@@ -428,9 +431,11 @@ public class BlobMovement : MonoBehaviour
 	IEnumerator Eat(bool isFood)
 	{
 		isEating = true;
+		if(isFood)
+			uiController.UpdateImages();
 		anim.SetInteger("animState",4);
 		isRunning = false;
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.3f);
 		isEating = false;
 		if(!isFood && food != null)
 		{
@@ -441,6 +446,7 @@ public class BlobMovement : MonoBehaviour
 		}
 		else if(isFood)
 		{
+			
 			FindFood();
 		}
 	}
@@ -523,11 +529,17 @@ public class BlobMovement : MonoBehaviour
 				xScale = transform.localScale.x / 2f;
 				yScale = transform.localScale.y;
 				targetEnemies = evolveTwoTargets;
+				anim.runtimeAnimatorController = midController;
+				anim.SetInteger("animState",0);
+				GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>().SetPetImage(evolveLevel);
 				break;
 			case 2:
 				transform.localScale = new Vector3(2,2,1);
 				xScale = transform.localScale.x / 2f;
 				yScale = transform.localScale.y;
+				anim.runtimeAnimatorController = largeController;
+				anim.SetInteger("animState",0);
+				GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>().SetPetImage(evolveLevel);
 				break;
 			}
 			yield return new WaitForSeconds(3.0f);

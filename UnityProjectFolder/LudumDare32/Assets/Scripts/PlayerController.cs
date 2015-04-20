@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
 	private BoxCollider2D _boxCollider;
 	
 	private GameController gameController;
+	private UIController uiController;
 	
 	//Set stuff up at the start
 	void Start()
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour
 		playerState = PlayerState.Idle;
 		anim = playerAnimation.GetComponent<Animator>();
 		gameController = Camera.main.GetComponent<GameController>();
+		uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
 		//anim.SetInteger("animState",0);
 		//Previous state is also idle`
 		_lastState = playerState;
@@ -237,6 +239,7 @@ public class PlayerController : MonoBehaviour
 			{
 				Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
 				f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
+				uiController.GetComponent<UIController>().UpdateImages();
 			}
 		}
 		

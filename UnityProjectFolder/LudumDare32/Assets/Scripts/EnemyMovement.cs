@@ -235,7 +235,7 @@ public class EnemyMovement : MonoBehaviour
 			if(GetComponent<Rigidbody2D>().velocity.x == 0)
 			{
 				playerState = PlayerState.Idle;
-				anim.SetInteger("animState",0);
+//				anim.SetInteger("animState",0);
 			}
 			else
 			{
@@ -406,13 +406,17 @@ public class EnemyMovement : MonoBehaviour
 	{
 		if(other.gameObject.tag == "JumpTrigger" && enemyType == EnemyType.Jumping)
 		{	
-			float blobY = Mathf.Round(GameObject.FindGameObjectWithTag("Blob").GetComponent<BlobMovement>().chaseY *2)/2;
-			float myY = Mathf.Round (transform.position.y * 2)/2;
-			if(myY < blobY)
+			GameObject blob = GameObject.FindGameObjectWithTag("Blob");
+			if(blob != null)
 			{
-				JumpTrigger.DirectionLimit dir = other.GetComponent<JumpTrigger>().directionLimit;
-				if(dir == JumpTrigger.DirectionLimit.None || (dir == JumpTrigger.DirectionLimit.Left && _faceDir == -1) || (dir == JumpTrigger.DirectionLimit.Right && _faceDir == 1))
-					Jump ();
+				float blobY = Mathf.Round(blob.GetComponent<BlobMovement>().chaseY *2)/2;
+				float myY = Mathf.Round (transform.position.y * 2)/2;
+				if(myY < blobY)
+				{
+					JumpTrigger.DirectionLimit dir = other.GetComponent<JumpTrigger>().directionLimit;
+					if(dir == JumpTrigger.DirectionLimit.None || (dir == JumpTrigger.DirectionLimit.Left && _faceDir == -1) || (dir == JumpTrigger.DirectionLimit.Right && _faceDir == 1))
+						Jump ();
+				}
 			}
 		}
 	}

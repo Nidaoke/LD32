@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 1292bc0546c949942bdca012ece7535e
-timeCreated: 1429471061
-licenseType: Free
+timeCreated: 1429508556
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: Treat Animation_0
@@ -119,7 +119,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Treat Animation_6
       rect:
@@ -179,7 +179,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -1,15 +1,19 @@
 fileFormatVersion: 2
-guid: 6dea72b341c632243adcfa22c775d833
-timeCreated: 1429570645
+guid: 73d90df45e6d0ee47bce8d18968830cd
+timeCreated: 1429573033
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ChaserRun_0
-    21300002: ChaserRun_1
-    21300004: ChaserRun_2
-    21300006: ChaserRun_3
-    21300008: ChaserRun_4
-    21300010: ChaserRun_5
+    21300000: PetSmallDeath_0
+    21300002: PetSmallDeath_1
+    21300004: PetSmallDeath_2
+    21300006: PetSmallDeath_3
+    21300008: PetSmallDeath_4
+    21300010: PetSmallDeath_5
+    21300012: PetSmallDeath_6
+    21300014: PetSmallDeath_7
+    21300016: PetSmallDeath_8
+    21300018: PetSmallDeath_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,68 +53,108 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: ChaserRun_0
+    - name: PetSmallDeath_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_1
+    - name: PetSmallDeath_1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 135
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_2
+    - name: PetSmallDeath_2
       rect:
         serializedVersion: 2
-        x: 192
+        x: 270
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_3
+    - name: PetSmallDeath_3
       rect:
         serializedVersion: 2
-        x: 288
+        x: 405
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_4
+    - name: PetSmallDeath_4
       rect:
         serializedVersion: 2
-        x: 384
+        x: 540
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_5
+    - name: PetSmallDeath_5
       rect:
         serializedVersion: 2
-        x: 480
+        x: 675
         y: 0
-        width: 96
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_6
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_7
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_8
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 135
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PetSmallDeath_9
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 0
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}

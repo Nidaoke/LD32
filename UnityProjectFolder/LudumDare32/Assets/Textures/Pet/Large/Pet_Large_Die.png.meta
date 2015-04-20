@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: 6dea72b341c632243adcfa22c775d833
-timeCreated: 1429570645
+guid: ec1da63113df8e546817a22c8db60bf2
+timeCreated: 1429572887
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ChaserRun_0
-    21300002: ChaserRun_1
-    21300004: ChaserRun_2
-    21300006: ChaserRun_3
-    21300008: ChaserRun_4
-    21300010: ChaserRun_5
+    21300000: Pet_Large_Die_0
+    21300002: Pet_Large_Die_1
+    21300004: Pet_Large_Die_2
+    21300006: Pet_Large_Die_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -55,62 +53,42 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: ChaserRun_0
+    - name: Pet_Large_Die_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_1
+    - name: Pet_Large_Die_1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 135
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_2
+    - name: Pet_Large_Die_2
       rect:
         serializedVersion: 2
-        x: 192
+        x: 270
         y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_3
+    - name: Pet_Large_Die_3
       rect:
         serializedVersion: 2
-        x: 288
+        x: 405
         y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_4
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_5
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 96
+        width: 135
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}

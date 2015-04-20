@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: 6dea72b341c632243adcfa22c775d833
-timeCreated: 1429570645
+guid: 830ece9eec3137d41aa2ada10522b453
+timeCreated: 1429572610
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ChaserRun_0
-    21300002: ChaserRun_1
-    21300004: ChaserRun_2
-    21300006: ChaserRun_3
-    21300008: ChaserRun_4
-    21300010: ChaserRun_5
+    21300000: ChaserDeath_0
+    21300002: ChaserDeath_1
+    21300004: ChaserDeath_2
+    21300006: ChaserDeath_3
+    21300008: ChaserDeath_4
+    21300010: ChaserDeath_5
+    21300012: ChaserDeath_6
+    21300014: ChaserDeath_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -55,7 +57,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: ChaserRun_0
+    - name: ChaserDeath_0
       rect:
         serializedVersion: 2
         x: 0
@@ -65,7 +67,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_1
+    - name: ChaserDeath_1
       rect:
         serializedVersion: 2
         x: 96
@@ -75,7 +77,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_2
+    - name: ChaserDeath_2
       rect:
         serializedVersion: 2
         x: 192
@@ -85,7 +87,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_3
+    - name: ChaserDeath_3
       rect:
         serializedVersion: 2
         x: 288
@@ -95,7 +97,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_4
+    - name: ChaserDeath_4
       rect:
         serializedVersion: 2
         x: 384
@@ -105,10 +107,30 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ChaserRun_5
+    - name: ChaserDeath_5
       rect:
         serializedVersion: 2
         x: 480
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ChaserDeath_6
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ChaserDeath_7
+      rect:
+        serializedVersion: 2
+        x: 672
         y: 0
         width: 96
         height: 96

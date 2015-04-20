@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraZed : MonoBehaviour {
 
 	public GameObject player;
-
+	Vector3 mPlayerPos;
 	[SerializeField] private float mCameraLerpSpeed = 0.05f;
 
 
@@ -17,8 +17,11 @@ public class CameraZed : MonoBehaviour {
 	void Update()
 	{
 		//Move towards the player ~Adam
-
-		transform.position = Vector3.Lerp(transform.position, new Vector3 (player.transform.position.x, player.transform.position.y, transform.position.z), mCameraLerpSpeed);
+		if(player != null)
+		{
+			mPlayerPos = player.transform.position;
+		}
+		transform.position = Vector3.Lerp(transform.position, new Vector3 (mPlayerPos.x, mPlayerPos.y, transform.position.z), mCameraLerpSpeed);
 
 		//Keep camera in level bounds ~Adam
 		//Y Min

@@ -414,6 +414,14 @@ public class BlobMovement : MonoBehaviour
 				gameController.AddScre(1);
 				uiController.IncreaseEvolution();
 				Destroy (other.gameObject);
+				if(other.GetComponent<EnemyMovement>() != null)
+				{
+					other.GetComponent<EnemyMovement>().SpawnDeathEffect();
+				}
+				if(other.GetComponent<BouncingEnemy>() != null)
+				{
+					other.GetComponent<BouncingEnemy>().SpawnDeathEffect();
+				}
 				StartCoroutine("Eat",false);
 			}
 			else

@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
 		}
 		
 		//Moved throw into a single check. Get count of food, then throw if there's not too many
-		if(Input.GetButtonDown("Throw") && canFeed && canInput) 
+		if(Input.GetButtonDown("Throw") && canFeed && canInput && Time.timeScale != 0) 
 		{
 			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
 			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.

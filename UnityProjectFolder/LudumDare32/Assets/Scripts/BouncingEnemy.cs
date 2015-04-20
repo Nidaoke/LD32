@@ -53,9 +53,12 @@ public class BouncingEnemy : MonoBehaviour
 		}
 	}
 
-	void OnDestroy(){
-
-		Debug.Log ("Bouncer Killed");
-		Instantiate (deathEffect, transform.position, Quaternion.identity);
+	public void SpawnDeathEffect()
+	{
+		if(deathEffect != null)
+		{
+			Debug.Log ("Bouncer Killed");
+			Instantiate (deathEffect, transform.position, Quaternion.identity);
+		}
 	}
 }

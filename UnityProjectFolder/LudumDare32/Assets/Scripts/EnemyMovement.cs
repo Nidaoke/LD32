@@ -404,8 +404,11 @@ public class EnemyMovement : MonoBehaviour
 		}
 	}
 
-	void OnDestroy(){
-
-		Instantiate (deathEffect, transform.position, Quaternion.identity);
+	public void SpawnDeathEffect()
+	{
+		if(deathEffect != null)
+		{
+			Instantiate (deathEffect, transform.position, Quaternion.identity);
+		}
 	}
 }

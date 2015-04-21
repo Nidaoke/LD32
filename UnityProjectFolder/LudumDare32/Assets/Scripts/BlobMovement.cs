@@ -106,10 +106,10 @@ public class BlobMovement : MonoBehaviour
 		GUI.Label (new Rect(10,90,200,200),playerState.ToString());
 	}
 
+	//DON'T INSTANTIATE THINGS IN HERE, IT CAUSES BUGS
 	void OnDestroy()
 	{
 
-		Instantiate (deathEffect, transform.position, Quaternion.identity);
 	}
 
 	//Set stuff up at the start
@@ -462,6 +462,7 @@ public class BlobMovement : MonoBehaviour
 						other.GetComponent<AudioSource>().PlayOneShot(mPetDeathSound);
 						Destroy(playerAnimation.gameObject);
 						gameController.GameOver();
+						Instantiate (deathEffect, transform.position, Quaternion.identity);
 						Destroy(gameObject);
 					}
 				}

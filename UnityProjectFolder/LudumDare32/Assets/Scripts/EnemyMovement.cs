@@ -5,6 +5,7 @@ public class EnemyMovement : MonoBehaviour
 {
 
 	//public SpriteRenderer spriteRenderer;
+	public AudioClip mEnemyDeathSound;
 
 	public GameObject deathEffect;
 

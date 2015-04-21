@@ -92,13 +92,22 @@ public class BlobMovement : MonoBehaviour
 	public RuntimeAnimatorController smallController;
 	public RuntimeAnimatorController midController;
 	public RuntimeAnimatorController largeController;
-	
+
+	//For sound effects ~Adam
+	[SerializeField] private AudioSource mPetSounds;
+	[SerializeField] private AudioSource mEnemyDeathSounds;
+	[SerializeField] private AudioClip mPetGotHitSound;
+	[SerializeField] private AudioClip mPetEatingSound;
+	[SerializeField] private AudioClip mPetEvolvingSound;
+	[SerializeField] private AudioClip mPetDeathSound;
+
 	void OnGUI()
 	{
 		GUI.Label (new Rect(10,90,200,200),playerState.ToString());
 	}
 
-	void OnDestroy(){
+	void OnDestroy()
+	{
 
 		Instantiate (deathEffect, transform.position, Quaternion.identity);
 	}
@@ -418,9 +427,8 @@ public class BlobMovement : MonoBehaviour
 			if(!canDie)
 			{
 				++enemiesEaten;
-				gameController.AddScre(1);
-				uiController.IncreaseEvolution();
-				Destroy (other.gameObject);
+				//Play eatign sound ~Adam
+				mPetSounds.PlayOneShot(mPetEatingSound);
 				if(other.GetComponent<EnemyMovement>() != null)
 				{
 					other.GetComponent<EnemyMovement>().SpawnDeathEffect();
@@ -429,6 +437,20 @@ public class BlobMovement : MonoBehaviour
 				{
 					other.GetComponent<BouncingEnemy>().SpawnDeathEffect();
 				}
+
+				gameController.AddScre(1);
+				uiController.IncreaseEvolution();
+				//Play a sound for the enmey death ~Adam
+				if(other.GetComponent<EnemyMovement>() != null)
+				{
+					mEnemyDeathSounds.PlayOneShot(other.GetComponent<EnemyMovement>().mEnemyDeathSound);
+				}
+				if(other.GetComponent<BouncingEnemy>() != null)
+				{
+					mEnemyDeathSounds.PlayOneShot(other.GetComponent<BouncingEnemy>().mEnemyDeathSound);
+				}
+				Destroy (other.gameObject);
+
 				StartCoroutine("Eat",false);
 			}
 			else
@@ -437,6 +459,7 @@ public class BlobMovement : MonoBehaviour
 				{
 					if(!evolveCooldown)
 					{
+						other.GetComponent<AudioSource>().PlayOneShot(mPetDeathSound);
 						Destroy(playerAnimation.gameObject);
 						gameController.GameOver();
 						Destroy(gameObject);
@@ -445,6 +468,7 @@ public class BlobMovement : MonoBehaviour
 				else 
 				{
 					--evolveLevel;
+					mPetSounds.PlayOneShot(mPetGotHitSound);
 					StartCoroutine("Evolve");
 				}
 			}
@@ -458,6 +482,8 @@ public class BlobMovement : MonoBehaviour
 	
 	IEnumerator Eat(bool isFood)
 	{
+		mPetSounds.PlayOneShot(mPetEatingSound);
+
 		isEating = true;
 		anim.SetInteger("animState",4);
 		isRunning = false;

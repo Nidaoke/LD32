@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {
+	[SerializeField] private AudioClip mPlayerDeathSound;
 
 	public int animStateShow;
 
@@ -390,6 +391,8 @@ public class PlayerController : MonoBehaviour
 		if(other.gameObject.tag == "Enemy")// || other.gameObject.tag == "Blob")
 		{
 			Debug.Log("You have died");
+			other.GetComponent<AudioSource>().PlayOneShot(mPlayerDeathSound);
+
 			if(deadParticle != null)
 				Instantiate(deadParticle, transform.position, Quaternion.identity);
 			gameController.GameOver();

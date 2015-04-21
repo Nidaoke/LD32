@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BouncingEnemy : MonoBehaviour 
 {
+	public AudioClip mEnemyDeathSound;
+
 	private float hSpeed;
 	private float vSpeed;
 

@@ -109,12 +109,7 @@ public class BlobMovement : MonoBehaviour
 	//DON'T INSTANTIATE THINGS IN HERE, IT CAUSES BUGS
 	void OnDestroy()
 	{
-<<<<<<< HEAD
-		if(deathEffect != null)
-			Instantiate (deathEffect, transform.position, Quaternion.identity);
-=======
 
->>>>>>> origin/master
 	}
 
 	//Set stuff up at the start

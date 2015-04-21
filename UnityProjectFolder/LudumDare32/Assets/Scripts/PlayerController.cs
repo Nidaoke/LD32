@@ -143,9 +143,11 @@ public class PlayerController : MonoBehaviour
 		if ((((Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f)) && canInput)) {
 			//This will determine the direction of horizontal raycasting
 			float checkDir = 0;
+
 			checkDir = Input.GetAxisRaw ("Horizontal");
 			_faceDir = checkDir;
-			
+			transform.localScale = new Vector3(checkDir, 1,1);
+
 			//We are not at a wall
 			_atWall = false;
 			//Raycast 5 rays horizontally
@@ -236,17 +238,7 @@ public class PlayerController : MonoBehaviour
 			Jump ();
 		}
 		
-<<<<<<< HEAD
-		//Moved throw into a single check. Get count of food, then throw if there's not too many
-		if(Input.GetButtonDown("Throw") && canFeed && canInput && Time.timeScale != 0) 
-		{
-			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
-			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
-			{
 
-//				anim.SetInteger("animState", 5);
-=======
->>>>>>> origin/master
 
 		
 		//Set our player state and animation based on what we're currently doing
@@ -273,26 +265,14 @@ public class PlayerController : MonoBehaviour
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
-<<<<<<< HEAD
-//				anim.SetInteger("animState",2);
-=======
+
 				anim.SetInteger("animState",1);
->>>>>>> origin/master
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
 				hasLanded = false;
-<<<<<<< HEAD
-//				anim.SetInteger("animState",3);
-			}
-		}
 
-//		if (playerState == PlayerState.Running) {
-//			playerState = PlayerState.Running;
-//			anim.SetInteger("animState", 1);
-//		}
-=======
 				anim.SetInteger("animState",1);
 			}
 		}
@@ -302,8 +282,7 @@ public class PlayerController : MonoBehaviour
 			playerState = PlayerState.Running;
 			anim.SetInteger("animState", 1);
 		}
->>>>>>> origin/master
-		
+
 		//Reset isJumping if we're not actually jumping
 		if(playerState != PlayerState.Jumping)
 			_isJumping = false;
@@ -405,11 +384,8 @@ public class PlayerController : MonoBehaviour
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;
-<<<<<<< HEAD
-//			anim.SetInteger("animState",2);
-=======
+
 			anim.SetInteger("animState",1);
->>>>>>> origin/master
 			//We are now jumoing
 			_isJumping = true;
 			//We are not on the ground

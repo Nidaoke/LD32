@@ -573,6 +573,7 @@ public class BlobMovement : MonoBehaviour
 		if(evolveLevel < 2)
 		{
 			isEvolving = true;
+			mPetSounds.PlayOneShot(mPetEvolvingSound);
 			switch(evolveLevel)
 			{
 			case 0:

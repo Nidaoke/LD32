@@ -23,11 +23,12 @@ public class UIController : MonoBehaviour
 	{
 		UpdateImages();
 	}
+	
 	public void IncreaseEvolution()
 	{
 		++currentEvo;
 		if(currentEvo == evolutionSprites.Length)
-			currentEvo = 0;
+			currentEvo = evolutionSprites.Length -1;
 		SetImage();
 	}
 	

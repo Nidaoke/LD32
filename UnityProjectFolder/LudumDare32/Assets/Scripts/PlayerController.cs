@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
 	
 	public float lastY;
 	private bool hasLanded;
+	private bool isThrowing;
 	
 	private BoxCollider2D _boxCollider;
 	
@@ -98,7 +99,7 @@ public class PlayerController : MonoBehaviour
 		_faceDir = 1;
 		//Player state is idle
 		playerState = PlayerState.Idle;
-		//anim = playerAnimation.GetComponent<Animator>();
+		anim = playerAnimation.GetComponent<Animator>();
 		gameController = Camera.main.GetComponent<GameController>();
 		uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
 		anim.SetInteger("animState",0);
@@ -232,17 +233,28 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 		
-		//If we press jump, and we're either grounded or allowed a second jump
+		//If we press jump, and we're grounded
 		if (Input.GetButtonDown ("Jump") && canInput) 
 		{	
 			Jump ();
 		}
+<<<<<<< HEAD
 		
 
 
+=======
+		//Moved throw into a single check. Get count of food, then throw if there's not too many
+//		if(Input.GetButtonDown("Throw") && canFeed && canInput && Time.timeScale != 0) 
+//		{
+//			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
+//			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
+//			{
+
+//				anim.SetInteger("animState", 5);
+>>>>>>> origin/master
 		
 		//Set our player state and animation based on what we're currently doing
-		if(isGrounded)
+		if(isGrounded && !isThrowing)
 		{
 			if(GetComponent<Rigidbody2D>().velocity.x == 0)
 			{
@@ -260,29 +272,51 @@ public class PlayerController : MonoBehaviour
 				lastY = transform.position.y;
 			}
 		}
-		else 
+		else if(!isThrowing)
 		{
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
+<<<<<<< HEAD
 
+=======
+//				anim.SetInteger("animState",2);
+>>>>>>> origin/master
 				anim.SetInteger("animState",1);
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
 				hasLanded = false;
+<<<<<<< HEAD
 
 				anim.SetInteger("animState",1);
 			}
 		}
+=======
+//				anim.SetInteger("animState",3);
+			}
+		}
+
+//		if (playerState == PlayerState.Running) {
+//			playerState = PlayerState.Running;
+//			anim.SetInteger("animState", 1);
+//		}
+//				anim.SetInteger("animState",1);
+//			}
+//		}
+>>>>>>> origin/master
 
 		if (playerState == PlayerState.Running) 
 		{
 			playerState = PlayerState.Running;
 			anim.SetInteger("animState", 1);
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> origin/master
 		//Reset isJumping if we're not actually jumping
 		if(playerState != PlayerState.Jumping)
 			_isJumping = false;
@@ -322,12 +356,13 @@ public class PlayerController : MonoBehaviour
 
 
 		//Moved throw into a single check. Get count of food, then throw if there's not too many
-		if(Input.GetButtonDown("Throw") && canFeed && canInput && Time.timeScale != 0) 
+		if(Input.GetButtonDown("Throw") && canFeed && canInput && !PauseManager.isPaused)
 		{
 			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
 			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
 			{
-				
+				isThrowing = true;
+				StartCoroutine("ThrowCooldown");
 				anim.SetInteger("animState", 5);
 				Debug.Log("Throwing Food "+ anim.GetInteger("animState"));
 				//Time.timeScale = 0;
@@ -384,7 +419,11 @@ public class PlayerController : MonoBehaviour
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;
+<<<<<<< HEAD
 
+=======
+//			anim.SetInteger("animState",2);
+>>>>>>> origin/master
 			anim.SetInteger("animState",1);
 			//We are now jumoing
 			_isJumping = true;
@@ -420,6 +459,12 @@ public class PlayerController : MonoBehaviour
 
 			canFeed = true;
 		}
+	}
+	
+	IEnumerator ThrowCooldown()
+	{
+		yield return new WaitForSeconds(0.2f);
+		isThrowing = false;
 	}
 
 	void OnTriggerExit2D(Collider2D col) {

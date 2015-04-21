@@ -69,21 +69,21 @@ public class BlobMovement : MonoBehaviour
 	//Check which way walls are when dashing
 	private int _wallDir;
 	
-	public GameObject food;
+	[HideInInspector]public GameObject food;
 	
 	private BoxCollider2D _boxCollider;
 	
-	public int enemiesEaten;
-	public int targetEnemies;
-	public int evolveLevel;
+	[HideInInspector]public int enemiesEaten;
+	[HideInInspector]public int targetEnemies;
+	[HideInInspector]public int evolveLevel;
 	
 	private float lastY;
 	[HideInInspector]public float chaseY;
 	private bool hasLanded;
-	public bool canDie;
+	[HideInInspector]public bool canDie;
 	
-	public int evolveOneTargets;
-	public int evolveTwoTargets;
+	private int evolveOneTargets = 4;
+	private int evolveTwoTargets = 4;
 	private float evolvePercentage;
 	
 	private UIController uiController;
@@ -109,7 +109,12 @@ public class BlobMovement : MonoBehaviour
 	//DON'T INSTANTIATE THINGS IN HERE, IT CAUSES BUGS
 	void OnDestroy()
 	{
+<<<<<<< HEAD
 
+=======
+		if(deathEffect != null)
+			Instantiate (deathEffect, transform.position, Quaternion.identity);
+>>>>>>> origin/master
 	}
 
 	//Set stuff up at the start
@@ -191,9 +196,19 @@ public class BlobMovement : MonoBehaviour
 			if(food != null)
 				canDie = false;
 		}
+		
+		//Make the pet a redish colour if he's chasing food or eating
+		if(isRunning || isEating)
+			playerAnimation.GetComponent<SpriteRenderer>().color = new Color(1,0.5f,0.5f);
+		else
+			playerAnimation.GetComponent<SpriteRenderer>().color = new Color(1,1,1);
+			
 		//Scale our animation to be facing the right direction
-		playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
-		playerAnimation.transform.position = transform.position;
+		if(playerAnimation != null)
+		{
+			playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
+			playerAnimation.transform.position = transform.position;
+		}
 		
 		if(canInput)
 		{
@@ -462,7 +477,8 @@ public class BlobMovement : MonoBehaviour
 						other.GetComponent<AudioSource>().PlayOneShot(mPetDeathSound);
 						Destroy(playerAnimation.gameObject);
 						gameController.GameOver();
-						Instantiate (deathEffect, transform.position, Quaternion.identity);
+						if(deathEffect != null)
+							Instantiate (deathEffect, transform.position, Quaternion.identity);
 						Destroy(gameObject);
 					}
 				}
@@ -608,9 +624,10 @@ public class BlobMovement : MonoBehaviour
 				GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>().SetPetImage(evolveLevel);
 				break;
 			}
-			yield return new WaitForSeconds(3.0f);
+			yield return new WaitForSeconds(0.5f);
 			isEvolving = false;
 			isRunning = true;
+			uiController.ResetEvolution();
 		}
 	}
 	

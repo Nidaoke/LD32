@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (playerState == PlayerState.Running) {
-
+			playerState = PlayerState.Running;
 			anim.SetInteger("animState", 1);
 		}
 		

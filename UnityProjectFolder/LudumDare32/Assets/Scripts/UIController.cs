@@ -31,6 +31,12 @@ public class UIController : MonoBehaviour
 		SetImage();
 	}
 	
+	public void ResetEvolution()
+	{
+		currentEvo = 0;
+		SetImage();
+	}
+	
 	void SetImage()
 	{
 		evolutionBar.GetComponent<Image>().sprite = evolutionSprites[currentEvo];

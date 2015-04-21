@@ -85,7 +85,7 @@ public class EnemyMovement : MonoBehaviour
 		//Player state is idle
 		playerState = PlayerState.Idle;
 		anim = playerAnimation.GetComponent<Animator>();
-		//anim.SetInteger("animState",0);
+		anim.SetInteger("animState",0);
 		//Previous state is also idle`
 		_lastState = playerState;
 		
@@ -114,15 +114,15 @@ public class EnemyMovement : MonoBehaviour
 			//This will determine the direction of horizontal raycasting
 			float checkDir = _faceDir;
 
-			if (checkDir == -1) {
-				
-				transform.localScale = new Vector2(-1, transform.localScale.y);
-			}
-			
-			if (checkDir == 1) {
-				
-				transform.localScale = new Vector2(1, transform.localScale.y);
-			}
+//			if (checkDir == -1) {
+//				
+//				transform.localScale = new Vector2(-1, transform.localScale.y);
+//			}
+//			
+//			if (checkDir == 1) {
+//				
+//				transform.localScale = new Vector2(1, transform.localScale.y);
+//			}
 
 			if(enemyType == EnemyType.Fleeing)
 			{
@@ -132,9 +132,9 @@ public class EnemyMovement : MonoBehaviour
 				if(foodCheck.collider != null && foodCheck.collider.gameObject.tag == "Food")
 				{
 					if(_faceDir == 1)
-						_faceDir = -2;
+						_faceDir = -1;
 					else
-						_faceDir = 2;
+						_faceDir = 1;
 				}
 			}
 			

@@ -101,15 +101,15 @@ public class BlobMovement : MonoBehaviour
 	[SerializeField] private AudioClip mPetEvolvingSound;
 	[SerializeField] private AudioClip mPetDeathSound;
 
-	void OnGUI()
-	{
-		GUI.Label (new Rect(10,90,200,200),playerState.ToString());
-	}
+//	void OnGUI()
+//	{
+//		GUI.Label (new Rect(10,90,200,200),playerState.ToString());
+//	}
 
 	void OnDestroy()
 	{
-
-		Instantiate (deathEffect, transform.position, Quaternion.identity);
+		if(deathEffect != null)
+			Instantiate (deathEffect, transform.position, Quaternion.identity);
 	}
 
 	//Set stuff up at the start
@@ -136,7 +136,7 @@ public class BlobMovement : MonoBehaviour
 		
 		//Get scales
 		xScale = transform.localScale.x / 2f;
-		yScale = transform.localScale.y;
+		yScale = transform.localScale.y / 2f;
 		targetEnemies = evolveOneTargets;
 		FindFood();
 		
@@ -468,6 +468,7 @@ public class BlobMovement : MonoBehaviour
 				else 
 				{
 					--evolveLevel;
+					uiController.ResetEvolution();
 					mPetSounds.PlayOneShot(mPetGotHitSound);
 					StartCoroutine("Evolve");
 				}
@@ -570,7 +571,7 @@ public class BlobMovement : MonoBehaviour
 	
 	IEnumerator Evolve()
 	{
-		if(evolveLevel < 2)
+		if(evolveLevel < 3)
 		{
 			isEvolving = true;
 			mPetSounds.PlayOneShot(mPetEvolvingSound);
@@ -581,7 +582,7 @@ public class BlobMovement : MonoBehaviour
 				transform.localScale = new Vector3(1,1,1);
 				GetComponent<CircleCollider2D>().offset = new Vector2(0,0);
 				xScale = transform.localScale.x /2f;
-				yScale = transform.localScale.y;
+				yScale = transform.localScale.y /2f;
 				targetEnemies = enemiesEaten + evolveOneTargets;
 				anim.runtimeAnimatorController = smallController;
 				anim.SetInteger("animState",0);

@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private AudioClip mPlayerDeathSound;
 
-	public int animStateShow;
+//	public int animStateShow;
 
 	public bool movedRight = true;
 
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 		anim = playerAnimation.GetComponent<Animator>();
 		gameController = Camera.main.GetComponent<GameController>();
 		uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
-		//anim.SetInteger("animState",0);
+		anim.SetInteger("animState",0);
 		//Previous state is also idle`
 		_lastState = playerState;
 		//Set health to max
@@ -119,25 +119,25 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{	
 
-		animStateShow = anim.GetInteger ("animState");
+//		animStateShow = anim.GetInteger ("animState");
 
-		if (Input.GetAxis ("Horizontal") < 0) {
-
-			movedRight = false;
-		}
-
-		if (Input.GetAxis ("Horizontal") > 0) {
-
-			movedRight = true;
-		}
-
-		if (movedRight) {
-
-			transform.localScale = new Vector2(1, transform.localScale.y);
-		} else {
-
-			transform.localScale = new Vector2(-1, transform.localScale.y);
-		}
+//		if (Input.GetAxis ("Horizontal") < 0) {
+//
+//			movedRight = false;
+//		}
+//
+//		if (Input.GetAxis ("Horizontal") > 0) {
+//
+//			movedRight = true;
+//		}
+//
+//		if (movedRight) {
+//
+//			transform.localScale = new Vector2(1, transform.localScale.y);
+//		} else {
+//
+//			transform.localScale = new Vector2(-1, transform.localScale.y);
+//		}
 
 		//Check to see if we've got horizontal input, or if we're dashing
 		if ((((Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f)) && canInput)) {
@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
 			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
 			{
 
-				//anim.SetInteger("animState", 5);
+//				anim.SetInteger("animState", 5);
 
 				Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
 				f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
@@ -274,20 +274,20 @@ public class PlayerController : MonoBehaviour
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
-				anim.SetInteger("animState",2);
+//				anim.SetInteger("animState",2);
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
 				hasLanded = false;
-				anim.SetInteger("animState",3);
+//				anim.SetInteger("animState",3);
 			}
 		}
 
-		if (playerState == PlayerState.Running) {
-			playerState = PlayerState.Running;
-			anim.SetInteger("animState", 1);
-		}
+//		if (playerState == PlayerState.Running) {
+//			playerState = PlayerState.Running;
+//			anim.SetInteger("animState", 1);
+//		}
 		
 		//Reset isJumping if we're not actually jumping
 		if(playerState != PlayerState.Jumping)
@@ -374,7 +374,7 @@ public class PlayerController : MonoBehaviour
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;
-			anim.SetInteger("animState",2);
+//			anim.SetInteger("animState",2);
 			//We are now jumoing
 			_isJumping = true;
 			//We are not on the ground

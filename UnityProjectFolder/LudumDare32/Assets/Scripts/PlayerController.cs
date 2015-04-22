@@ -318,8 +318,9 @@ public class PlayerController : MonoBehaviour
 				anim.SetInteger("animState", 5);
 				Debug.Log("Throwing Food "+ anim.GetInteger("animState"));
 				//Time.timeScale = 0;
-				Transform f = (Transform)Instantiate(food,transform.position,Quaternion.identity);
-				f.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
+				Transform newFood = (Transform)Instantiate(food,transform.position,Quaternion.identity);
+				newFood.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
+				Camera.main.GetComponent<CameraZed>().mLastFood = newFood.gameObject;
 			}
 		}
 	}

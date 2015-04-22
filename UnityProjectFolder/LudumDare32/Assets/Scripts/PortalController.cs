@@ -9,7 +9,19 @@ public class PortalController : MonoBehaviour
 	{
 		if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Blob" || other.gameObject.tag == "Player"|| other.gameObject.tag == "Food")
 		{
-			other.transform.position = portalExit.position;
+			//To keep creatures that are too large from getting stuck in portals -Adam
+			if(other.gameObject.GetComponent<PortalCooldown>()!= null)
+			{
+				if(other.gameObject.GetComponent<PortalCooldown>().mPortalCooldown <=0f)
+				{
+					other.transform.position = portalExit.position;
+					other.gameObject.GetComponent<PortalCooldown>().mPortalCooldown = 0.5f;
+				}
+			}
+			else
+			{
+				other.transform.position = portalExit.position;
+			}
 		}
 	}
 }

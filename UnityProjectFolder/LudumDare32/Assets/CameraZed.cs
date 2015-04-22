@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraZed : MonoBehaviour {
+public class CameraZed : MonoBehaviour 
+{
 
 	public GameObject player;
-	Vector3 mPlayerPos;
-	[SerializeField] private float mCameraLerpSpeed = 0.05f;
+	public GameObject mBlob;
+	public GameObject mLastFood;
+	Vector3 mCameraTarget;
+	[SerializeField] private float mCameraBaseLerpSpeed = 0.05f;
+	[SerializeField] private float mCameraLerpSpeed = 0.05f; //Dynamically adjusted based on how far the camera is from what it is looking at -Adam
 
 
 	[SerializeField] private float mYPosMin = -1.75f;
@@ -14,14 +18,48 @@ public class CameraZed : MonoBehaviour {
 	[SerializeField] private float mXPosMax = 12f;
 
 
+	void Start()
+	{
+		if(player != null)
+		{
+			mCameraTarget = player.transform.position;
+		}
+		if(player != null)
+		{
+			if(player.GetComponent<PlayerController>().playerState == PlayerController.PlayerState.Idle)
+			{
+				mCameraTarget = player.transform.position;
+			}
+			else if(mBlob != null)
+			{
+				mCameraTarget = mBlob.transform.position;
+			}
+		}
+	}
+
 	void Update()
 	{
 		//Move towards the player ~Adam
 		if(player != null)
 		{
-			mPlayerPos = player.transform.position;
+			if(mLastFood != null && !mLastFood.GetComponent<ThrowFood>().isGrounded)
+			{
+				mCameraTarget = mLastFood.transform.position;
+				mCameraLerpSpeed = Mathf.Clamp(mCameraBaseLerpSpeed/5 + Vector2.Distance(transform.position, mCameraTarget)/100f, 0.01f, 0.5f);
+			}
+			else if(player.GetComponent<PlayerController>().playerState != PlayerController.PlayerState.Idle)
+			{
+				mCameraTarget = player.transform.position;
+				mCameraLerpSpeed = mCameraBaseLerpSpeed;
+			}
+			else if(mBlob != null)
+			{
+				mCameraTarget = mBlob.transform.position;
+				mCameraLerpSpeed = Mathf.Clamp(mCameraBaseLerpSpeed/5 + Vector2.Distance(transform.position, mCameraTarget)/20000f, 0.01f, 0.5f);
+			}
 		}
-		transform.position = Vector3.Lerp(transform.position, new Vector3 (mPlayerPos.x, mPlayerPos.y, transform.position.z), mCameraLerpSpeed);
+
+		transform.position = Vector3.Lerp(transform.position, new Vector3 (mCameraTarget.x, mCameraTarget.y, transform.position.z), mCameraLerpSpeed);
 
 		//Keep camera in level bounds ~Adam
 		//Y Min

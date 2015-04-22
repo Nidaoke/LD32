@@ -63,19 +63,22 @@ public class BlobMovement : MonoBehaviour
 	//Length of our downward facing rays
 	private float _dRay;
 	//Our transforms x scale
-	private float xScale;
+	[SerializeField] private float xScale;
 	//Our transforms y scale
-	private float yScale;
+	[SerializeField] private float yScale;
 	//Check which way walls are when dashing
 	private int _wallDir;
 	
 	[HideInInspector]public GameObject food;
 	
-	private BoxCollider2D _boxCollider;
-	
-	[HideInInspector]public int enemiesEaten;
-	[HideInInspector]public int targetEnemies;
-	[HideInInspector]public int evolveLevel;
+//	private BoxCollider2D _boxCollider;
+	[SerializeField] private CircleCollider2D mCollisionCircle;
+	[SerializeField] private CircleCollider2D mTriggerCircle;
+
+
+	public int enemiesEaten;
+	public int targetEnemies;
+	public int evolveLevel;
 	
 	private float lastY;
 	[HideInInspector]public float chaseY;
@@ -116,7 +119,7 @@ public class BlobMovement : MonoBehaviour
 	{
 		lastY = -9999;
 		chaseY = -9999;
-		_boxCollider = GetComponent<BoxCollider2D>();
+//		_boxCollider = GetComponent<BoxCollider2D>();
 		//Facing right
 		_faceDir = 1;
 		//Player state is idle
@@ -201,7 +204,20 @@ public class BlobMovement : MonoBehaviour
 		if(playerAnimation != null)
 		{
 			playerAnimation.transform.localScale = new Vector3(_faceDir,1,1);
-			playerAnimation.transform.position = transform.position;
+			switch (evolveLevel)
+			{
+			case 0:
+				playerAnimation.transform.position = transform.position;
+				break;
+			case 1: 
+				playerAnimation.transform.position = transform.position + new Vector3(0f,0.4f,0f);
+				break;
+			case 2:
+				playerAnimation.transform.position = transform.position + new Vector3(0f,0.4f,0f);
+				break;
+			default:
+				break;
+			}
 		}
 		
 		if(canInput)
@@ -293,6 +309,7 @@ public class BlobMovement : MonoBehaviour
 				SetY();
 				CheckFood();
 			}
+
 		}
 		else 
 		{
@@ -330,14 +347,14 @@ public class BlobMovement : MonoBehaviour
 			_dRay = 1.0f;
 		}
 		
-		//Making the players head a trigger when falling. This stops him from getting stuck on walls
-		if(playerState == PlayerState.Falling)
-		{
-			hasLanded = false;
-			_boxCollider.isTrigger = true;
-		}
-		else
-			_boxCollider.isTrigger = false;
+//		//Making the players head a trigger when falling. This stops him from getting stuck on walls
+//		if(playerState == PlayerState.Falling)
+//		{
+//			hasLanded = false;
+//			_boxCollider.isTrigger = true;
+//		}
+//		else
+//			_boxCollider.isTrigger = false;
 		
 		//If we're on the ground, not 1 unit above our rayhit, rayhit exists, and we're not jumping
 		if(isGrounded && transform.position.y != _minY+yScale && _minY != Mathf.NegativeInfinity && _dRay > 0 && !_isJumping)
@@ -591,7 +608,11 @@ public class BlobMovement : MonoBehaviour
 			case 0:
 				StartCoroutine("EvolveCooldown");
 				transform.localScale = new Vector3(1,1,1);
-				GetComponent<CircleCollider2D>().offset = new Vector2(0,0);
+				mCollisionCircle.offset = new Vector2(0,0);
+				mTriggerCircle.offset = new Vector2(0,0);
+				mCollisionCircle.radius = 0.5f;
+				mTriggerCircle.radius = 0.52f;
+
 				xScale = transform.localScale.x /2f;
 				yScale = transform.localScale.y /2f;
 				targetEnemies = enemiesEaten + evolveOneTargets;
@@ -601,8 +622,12 @@ public class BlobMovement : MonoBehaviour
 				break;
 			case 1:
 				transform.localScale = new Vector3(1,1,1);
-				GetComponent<CircleCollider2D>().offset = new Vector2(0,-0.5f);
-				xScale = transform.localScale.x / 2f;
+				mCollisionCircle.offset = new Vector2(0,0);
+				mTriggerCircle.offset = new Vector2(0,0);
+				mCollisionCircle.radius = 0.98f;
+				mTriggerCircle.radius = 1.2f;
+
+				xScale = transform.localScale.x;
 				yScale = transform.localScale.y;
 				targetEnemies = enemiesEaten + evolveTwoTargets;
 				anim.runtimeAnimatorController = midController;
@@ -611,7 +636,12 @@ public class BlobMovement : MonoBehaviour
 				break;
 			case 2:
 				transform.localScale = new Vector3(2,2,1);
-				xScale = transform.localScale.x / 2f;
+				mCollisionCircle.offset = new Vector2(0,0);
+				mTriggerCircle.offset = new Vector2(0,0);
+				mCollisionCircle.radius = 0.98f;
+				mTriggerCircle.radius = 1.2f;
+
+				xScale = transform.localScale.x;
 				yScale = transform.localScale.y;
 				anim.runtimeAnimatorController = largeController;
 				anim.SetInteger("animState",0);

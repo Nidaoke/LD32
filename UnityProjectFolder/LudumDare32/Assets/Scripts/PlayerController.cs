@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 	//Particles to explode the player
 	public Transform deadParticle;
 	//Child object which holds our animations	
-	public Transform playerAnimation;
+//	public Transform playerAnimation;
 	//The animator for our child object
 	public Animator anim;
 	
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 		_faceDir = 1;
 		//Player state is idle
 		playerState = PlayerState.Idle;
-		anim = playerAnimation.GetComponent<Animator>();
+//		anim = playerAnimation.GetComponent<Animator>();
 		gameController = Camera.main.GetComponent<GameController>();
 		uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
 		anim.SetInteger("animState",0);
@@ -120,25 +120,6 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{	
 
-//		animStateShow = anim.GetInteger ("animState");
-
-//		if (Input.GetAxis ("Horizontal") < 0) {
-//
-//			movedRight = false;
-//		}
-//
-//		if (Input.GetAxis ("Horizontal") > 0) {
-//
-//			movedRight = true;
-//		}
-//
-//		if (movedRight) {
-//
-//			transform.localScale = new Vector2(1, transform.localScale.y);
-//		} else {
-//
-//			transform.localScale = new Vector2(-1, transform.localScale.y);
-//		}
 
 		//Check to see if we've got horizontal input, or if we're dashing
 		if ((((Input.GetAxisRaw ("Horizontal") > 0.5f || Input.GetAxisRaw ("Horizontal") < -0.5f)) && canInput)) {
@@ -171,8 +152,8 @@ public class PlayerController : MonoBehaviour
 			_atWall = false;
 		}
 		
-		//Scale our animation to be facing the right direction
-		playerAnimation.transform.localScale = new Vector3 (_faceDir, 1, 1);
+//		//Scale our animation to be facing the right direction
+//		playerAnimation.transform.localScale = new Vector3 (_faceDir, 1, 1);
 		
 		if (canInput) {
 			float s = _currentSpeed / movementSpeed;
@@ -238,23 +219,9 @@ public class PlayerController : MonoBehaviour
 		{	
 			Jump ();
 		}
-<<<<<<< HEAD
-		
 
-
-=======
-		//Moved throw into a single check. Get count of food, then throw if there's not too many
-//		if(Input.GetButtonDown("Throw") && canFeed && canInput && Time.timeScale != 0) 
-//		{
-//			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
-//			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
-//			{
-
-//				anim.SetInteger("animState", 5);
->>>>>>> origin/master
-		
 		//Set our player state and animation based on what we're currently doing
-		if(isGrounded && !isThrowing)
+		if(isGrounded)
 		{
 			if(GetComponent<Rigidbody2D>().velocity.x == 0)
 			{
@@ -272,28 +239,18 @@ public class PlayerController : MonoBehaviour
 				lastY = transform.position.y;
 			}
 		}
-		else if(!isThrowing)
+		else
 		{
 			if(GetComponent<Rigidbody2D>().velocity.y > 0)
 			{
 				playerState = PlayerState.Jumping;
-<<<<<<< HEAD
-
-=======
-//				anim.SetInteger("animState",2);
->>>>>>> origin/master
 				anim.SetInteger("animState",1);
 			}
 			else
 			{
 				playerState = PlayerState.Falling;
 				hasLanded = false;
-<<<<<<< HEAD
 
-				anim.SetInteger("animState",1);
-			}
-		}
-=======
 //				anim.SetInteger("animState",3);
 			}
 		}
@@ -305,18 +262,13 @@ public class PlayerController : MonoBehaviour
 //				anim.SetInteger("animState",1);
 //			}
 //		}
->>>>>>> origin/master
 
 		if (playerState == PlayerState.Running) 
 		{
 			playerState = PlayerState.Running;
 			anim.SetInteger("animState", 1);
 		}
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> origin/master
 		//Reset isJumping if we're not actually jumping
 		if(playerState != PlayerState.Jumping)
 			_isJumping = false;
@@ -361,8 +313,8 @@ public class PlayerController : MonoBehaviour
 			feedAmount = GameObject.FindGameObjectsWithTag("Food").Length;
 			if(feedAmount <= (feedMax - 1))//For some reason it keeps adding one to it, that's fine though.
 			{
-				isThrowing = true;
-				StartCoroutine("ThrowCooldown");
+//				isThrowing = true;
+//				StartCoroutine("ThrowCooldown");
 				anim.SetInteger("animState", 5);
 				Debug.Log("Throwing Food "+ anim.GetInteger("animState"));
 				//Time.timeScale = 0;
@@ -419,11 +371,7 @@ public class PlayerController : MonoBehaviour
 		{
 			//Player state is jumping
 			playerState = PlayerState.Jumping;
-<<<<<<< HEAD
 
-=======
-//			anim.SetInteger("animState",2);
->>>>>>> origin/master
 			anim.SetInteger("animState",1);
 			//We are now jumoing
 			_isJumping = true;
@@ -461,11 +409,11 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 	
-	IEnumerator ThrowCooldown()
-	{
-		yield return new WaitForSeconds(0.2f);
-		isThrowing = false;
-	}
+//	IEnumerator ThrowCooldown()
+//	{
+//		yield return new WaitForSeconds(0.2f);
+//		isThrowing = false;
+//	}
 
 	void OnTriggerExit2D(Collider2D col) {
 

@@ -42,20 +42,22 @@ public class CameraZed : MonoBehaviour
 		//Move towards the player ~Adam
 		if(player != null)
 		{
-			if(mLastFood != null && !mLastFood.GetComponent<ThrowFood>().isGrounded)
+			if(mLastFood != null && !mLastFood.GetComponent<ThrowFood>().isGrounded
+			   &&Vector2.Distance(mLastFood.transform.position,player.transform.position) < 50f)
 			{
 				mCameraTarget = mLastFood.transform.position;
-				mCameraLerpSpeed = Mathf.Clamp(mCameraBaseLerpSpeed/5 + Vector2.Distance(transform.position, mCameraTarget)/100f, 0.01f, 0.5f);
+				mCameraLerpSpeed = mCameraBaseLerpSpeed/5f;
 			}
-			else if(player.GetComponent<PlayerController>().playerState != PlayerController.PlayerState.Idle)
+			else if(mBlob != null && player.GetComponent<PlayerController>().playerState == PlayerController.PlayerState.Idle
+			        &&Vector2.Distance(mBlob.transform.position,player.transform.position) < 50f)
+			{
+				mCameraTarget = mBlob.transform.position;
+				mCameraLerpSpeed = mCameraBaseLerpSpeed/5f;
+			}
+			else
 			{
 				mCameraTarget = player.transform.position;
 				mCameraLerpSpeed = mCameraBaseLerpSpeed;
-			}
-			else if(mBlob != null)
-			{
-				mCameraTarget = mBlob.transform.position;
-				mCameraLerpSpeed = Mathf.Clamp(mCameraBaseLerpSpeed/5 + Vector2.Distance(transform.position, mCameraTarget)/20000f, 0.01f, 0.5f);
 			}
 		}
 

@@ -455,6 +455,7 @@ public class BlobMovement : MonoBehaviour
 				++enemiesEaten;
 				//Play eatign sound ~Adam
 				mPetSounds.PlayOneShot(mPetEatingSound);
+				Camera.main.GetComponent<CameraShakeLD>().ShakeCamera(1f, 0.2f);
 				if(other.GetComponent<EnemyMovement>() != null)
 				{
 					other.GetComponent<EnemyMovement>().SpawnDeathEffect();
@@ -512,6 +513,7 @@ public class BlobMovement : MonoBehaviour
 	IEnumerator Eat(bool isFood)
 	{
 		mPetSounds.PlayOneShot(mPetEatingSound);
+		Camera.main.GetComponent<CameraShakeLD>().ShakeCamera(1f, 0.2f);
 
 		isEating = true;
 		anim.SetInteger("animState",4);
@@ -603,6 +605,9 @@ public class BlobMovement : MonoBehaviour
 		{
 			isEvolving = true;
 			mPetSounds.PlayOneShot(mPetEvolvingSound);
+
+			Camera.main.GetComponent<CameraShakeLD>().ShakeCamera(1f, 0.2f);
+
 			switch(evolveLevel)
 			{
 			case 0:

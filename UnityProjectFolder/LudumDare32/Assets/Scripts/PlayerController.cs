@@ -94,7 +94,6 @@ public class PlayerController : MonoBehaviour
 	//Set stuff up at the start
 	void Start()
 	{
-
 		_boxCollider = GetComponent<BoxCollider2D>();
 		//Facing right
 		_faceDir = 1;

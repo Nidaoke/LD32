@@ -316,7 +316,6 @@ public class PlayerController : MonoBehaviour
 //				isThrowing = true;
 //				StartCoroutine("ThrowCooldown");
 				anim.SetInteger("animState", 5);
-				Debug.Log("Throwing Food "+ anim.GetInteger("animState"));
 				//Time.timeScale = 0;
 				Transform newFood = (Transform)Instantiate(food,transform.position,Quaternion.identity);
 				newFood.GetComponent<ThrowFood>().Throw(750 *_faceDir, 750);
@@ -399,15 +398,15 @@ public class PlayerController : MonoBehaviour
 //			Destroy(blob);
 		}
 
-		if (other.gameObject.tag == "Portal") {
-
-			Debug.Log("In Portal");
-
-			canFeed = false;
-		} else {
-
-			canFeed = true;
-		}
+//		if (other.gameObject.tag == "Portal") {
+//
+//			Debug.Log("In Portal");
+//
+//			canFeed = false;
+//		} else {
+//
+//			canFeed = true;
+//		}
 	}
 	
 //	IEnumerator ThrowCooldown()
@@ -416,13 +415,13 @@ public class PlayerController : MonoBehaviour
 //		isThrowing = false;
 //	}
 
-	void OnTriggerExit2D(Collider2D col) {
+//	void OnTriggerExit2D(Collider2D col) {
 
 //		Debug.Log ("Exited Trigger");
 
-		if (col.gameObject.tag == "Portal") {
-
-			canFeed = true;
-		}
-	}
+//		if (col.gameObject.tag == "Portal") {
+//
+//			canFeed = true;
+//		}
+//	}
 }

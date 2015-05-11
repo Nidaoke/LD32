@@ -69,7 +69,7 @@ public class BlobMovement : MonoBehaviour
 	//Check which way walls are when dashing
 	private int _wallDir;
 	
-	[HideInInspector]public GameObject food;
+	public GameObject food;
 	
 //	private BoxCollider2D _boxCollider;
 	[SerializeField] private CircleCollider2D mCollisionCircle;
@@ -370,7 +370,7 @@ public class BlobMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		//If we're allowed to move and not at a wall then we will set our horizontal velocity based on input
-		if (!_atWall)
+		if (!_atWall && isRunning)
 		{
 			GetComponent<Rigidbody2D>().velocity = new Vector2 (_currentSpeed, GetComponent<Rigidbody2D>().velocity.y);
 		}
@@ -537,8 +537,14 @@ public class BlobMovement : MonoBehaviour
 	
 	public void FindFood()
 	{
-		if(food == null)
-		{
+		StartCoroutine ("FoodCheck");
+	}
+	
+	IEnumerator FoodCheck()
+	{
+		yield return null;
+//		if(food == null)
+//		{
 			food = GameObject.FindGameObjectWithTag("Food");
 			if(food != null)
 			{
@@ -552,9 +558,13 @@ public class BlobMovement : MonoBehaviour
 			}
 			else
 			{
+				Debug.Log("Found no food");
 				canDie = true;
+				isRunning = false;
+//				_currentSpeed = 0;
+//				GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			}
-		}
+//		}
 		
 		CheckFood();
 	}

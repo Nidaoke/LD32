@@ -7,6 +7,13 @@ public class ThrowFood : MonoBehaviour
 	
 	public GameObject currentPlatform;
 	
+	public float foodLife;
+	
+	void Awake()
+	{
+		StartCoroutine("KillFood");
+	}
+	
 	void Update()
 	{
 		if(!isGrounded)
@@ -44,6 +51,12 @@ public class ThrowFood : MonoBehaviour
 		GameObject pet = GameObject.FindGameObjectWithTag("Blob");
 		if(pet != null)
 			pet.GetComponent<BlobMovement>().FindFood();
-		
+	}
+	
+	IEnumerator KillFood()
+	{
+		yield return new WaitForSeconds(foodLife);
+		CallPet();
+		Destroy (gameObject);
 	}
 }

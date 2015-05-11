@@ -7,7 +7,7 @@ public class PortalController : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Blob" || other.gameObject.tag == "Player"|| other.gameObject.tag == "Food")
+		if(other.gameObject.tag == "Enemy")// || other.gameObject.tag == "Blob" || other.gameObject.tag == "Player"|| other.gameObject.tag == "Food")
 		{
 			//To keep creatures that are too large from getting stuck in portals -Adam
 			if(other.gameObject.GetComponent<PortalCooldown>()!= null)
